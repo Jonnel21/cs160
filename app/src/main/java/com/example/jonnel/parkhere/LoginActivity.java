@@ -3,6 +3,7 @@ package com.example.jonnel.parkhere;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -203,8 +204,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuth.createUserWithEmailAndPassword(email, password);
             mAuthTask.execute((Void) null);
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Context context = getApplicationContext();
+                                CharSequence failure = "Success.";
+                                int duration = Toast.LENGTH_SHORT;
+
+                                Toast.makeText(context, failure, duration).show();
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Context context = getApplicationContext();
+                                CharSequence failure = "Unable to sign in.";
+                                int duration = Toast.LENGTH_SHORT;
+
+                                Toast.makeText(context, failure, duration).show();
+                            }
+
+                            // ...
+                        }
+                    });
         }
     }
 
