@@ -199,13 +199,52 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+            signIn();
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            mAuth.createUserWithEmailAndPassword(email, password)
+            signIn();
+            //mAuth.signInWithEmailAndPassword(email,password);
+                    /*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Context context = getApplicationContext();
+                                CharSequence failure = "Success: You were able to sign in.";
+                                int duration = Toast.LENGTH_LONG;
+
+                                Toast.makeText(context, failure, duration).show();
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Context context = getApplicationContext();
+                                CharSequence failure = "Error: Check if password was entered correctly.";
+                                int duration = Toast.LENGTH_LONG;
+
+                                Toast.makeText(context, failure, duration).show();
+                            }
+
+                            // ...
+                        }
+                    });*/
+        }
+    }
+
+    // signs the user into the database
+    // checks if email and password are in the database
+    private void signIn()
+    {
+        // Store values at the time of the login attempt.
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+
+        mAuth.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -213,15 +252,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Context context = getApplicationContext();
-                                CharSequence failure = "Success.";
-                                int duration = Toast.LENGTH_SHORT;
+                                CharSequence failure = "Success: You were able to sign in.";
+                                int duration = Toast.LENGTH_LONG;
 
                                 Toast.makeText(context, failure, duration).show();
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Context context = getApplicationContext();
-                                CharSequence failure = "Unable to sign in.";
+                                CharSequence failure = "Error: Check if password was entered correctly.";
                                 int duration = Toast.LENGTH_SHORT;
 
                                 Toast.makeText(context, failure, duration).show();
@@ -230,7 +269,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // ...
                         }
                     });
-        }
     }
 
     private boolean isEmailValid(String email) {
