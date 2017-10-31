@@ -37,7 +37,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        LatLng SanJose=new LatLng(37.3382,-1218863);
+        mMap.addMarker(new MarkerOptions().position(SanJose).title("Marker in San Jose"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SanJose,11));
         /**
          *  Adds marker to google map on click
          */
