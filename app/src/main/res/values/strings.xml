@@ -17,4 +17,10 @@
     <string name="Login">Log In</string>
     <string name="register">Register</string>
     <string name="title_activity_maps">Map</string>
+    <string name="searchlisting">SearchListing</string>
+    <string name="createlisting">CreateListing</string>
+    <string name="deletelisting">DeleteListing</string>
+    <string name="profile">Profile</string>
+    <string name="signout">SignOut</string>
+    <string name="username">userName</string>
 </resources>
