@@ -12,7 +12,6 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
         final Button login = findViewById(R.id.button2);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -20,12 +19,11 @@ public class WelcomeActivity extends AppCompatActivity {
                 login();
             }
         });
-
         final Button register = findViewById(R.id.button3);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                register();
             }
         });
     }
@@ -36,4 +34,12 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void register()
+    {
+
+        Intent intent = new Intent( this, RegisterActivity.class);
+        startActivity(intent);
+
+
+    }
 }

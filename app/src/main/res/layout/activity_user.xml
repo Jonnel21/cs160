@@ -11,46 +11,65 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:text="Email"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="29dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="SearchListing"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="80dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:text="CreateListing"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="147dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:text="DeleteListing"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="211dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:text="Profile"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="278dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:text="SignOut"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="341dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
 </android.support.constraint.ConstraintLayout>
