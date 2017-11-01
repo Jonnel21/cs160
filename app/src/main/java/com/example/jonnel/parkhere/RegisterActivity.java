@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -47,23 +46,16 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
 
-    
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -85,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Initialize FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -95,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptRegister();
                     return true;
                 }
                 return false;
@@ -106,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptRegister();
             }
         });
 
@@ -163,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptRegister() {
         if (mAuthTask != null) {
             return;
         }
@@ -201,60 +193,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             showProgress(true);
-            signIn();
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            signIn();
-            //mAuth.signInWithEmailAndPassword(email,password);
-                    /*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Context context = getApplicationContext();
-                                CharSequence failure = "Success: You were able to sign in.";
-                                int duration = Toast.LENGTH_LONG;
-
-                                Toast.makeText(context, failure, duration).show();
-
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Context context = getApplicationContext();
-                                CharSequence failure = "Error: Check if password was entered correctly.";
-                                int duration = Toast.LENGTH_LONG;
-
-                                Toast.makeText(context, failure, duration).show();
-                            }
-
-                            // ...
-                        }
-                    });*/
-        }
-    }
-
-
-    private void startMenu()
-    {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-    }
-
-
-    // signs the user into the database
-    // checks if email and password are in the database
-    private void signIn()
-    {
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        mAuth.signInWithEmailAndPassword(email,password)
+            mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -262,17 +205,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Context context = getApplicationContext();
-                                CharSequence failure = "Success: You were able to sign in.";
-                                int duration = Toast.LENGTH_LONG;
+                                CharSequence failure = "Success.";
+                                int duration = Toast.LENGTH_SHORT;
 
                                 Toast.makeText(context, failure, duration).show();
-                                startMenu();
-
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Context context = getApplicationContext();
-                                CharSequence failure = "Error: Check if password was entered correctly.";
+                                CharSequence failure = "Unable to sign in.";
                                 int duration = Toast.LENGTH_SHORT;
 
                                 Toast.makeText(context, failure, duration).show();
@@ -281,6 +222,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // ...
                         }
                     });
+        }
     }
 
     private boolean isEmailValid(String email) {
@@ -366,7 +308,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(RegisterActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -408,13 +350,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
 
             // TODO: register the new account here.
             return true;
