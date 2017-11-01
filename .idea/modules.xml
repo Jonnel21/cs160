@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ParkHere.iml" filepath="$PROJECT_DIR$/ParkHere.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\ParkHereRepo\ParkHere.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\ParkHereRepo\ParkHere.iml" />
       <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\ParkHere2.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\ParkHere2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../cs160/WelcomePage/WelcomePage.iml" filepath="$PROJECT_DIR$/../cs160/WelcomePage/WelcomePage.iml" />
-      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\ParkHere\WelcomePage\WelcomePage.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\ParkHere\WelcomePage\WelcomePage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../cs160/app/app.iml" filepath="$PROJECT_DIR$/../cs160/app/app.iml" />
-      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\ParkHere\app\app.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\ParkHere\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParkHereRepo.iml" filepath="$PROJECT_DIR$/ParkHereRepo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ParkHere/WelcomePage/WelcomePage.iml" filepath="$PROJECT_DIR$/../ParkHere/WelcomePage/WelcomePage.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\WelcomePage\WelcomePage.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\WelcomePage\WelcomePage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ParkHere/app/app.iml" filepath="$PROJECT_DIR$/../ParkHere/app/app.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\app\app.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\app\app.iml" />
       <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\ParkHere\cs160.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\ParkHere\cs160.iml" />
     </modules>
   </component>
