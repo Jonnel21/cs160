@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
 
+    
     /**
      * Id to identity READ_CONTACTS permission request.
      */

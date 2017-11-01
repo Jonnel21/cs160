@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ParkHere2.iml" filepath="$PROJECT_DIR$/ParkHere2.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\ParkHere2.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\ParkHere2.iml" />
       <module fileurl="file://$PROJECT_DIR$/WelcomePage/WelcomePage.iml" filepath="$PROJECT_DIR$/WelcomePage/WelcomePage.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\WelcomePage\WelcomePage.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\WelcomePage\WelcomePage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\cs160\app\app.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\cs160\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs160.iml" filepath="$PROJECT_DIR$/cs160.iml" />
     </modules>
   </component>
 </project>
