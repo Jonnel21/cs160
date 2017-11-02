@@ -69,6 +69,7 @@ public class createListing_Activity extends AppCompatActivity {
                 String uid = user.getUid();
                 address = address_text.getText().toString();
                 price = Double.parseDouble(price_text.getText().toString());
+                String hash = UUID.randomUUID().toString().substring(0,12);
                 //spot = new PSpot(price, null, address, null, null);
 
                 PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"));
@@ -99,7 +100,7 @@ public class createListing_Activity extends AppCompatActivity {
                 //userListings.put("e-mail:",user.getEmail());
                 //userListings.put("userID:",uid);
                 //userListings.put("parking spot", spot);
-                dataRef.child(uid).child("Parking Spot Listing:" + UUID.randomUUID().toString()).setValue(spot);
+                dataRef.child("User Id: "+ uid).child("Parking Spot Listing:" + hash).setValue(spot);
                //dataRef.child(UUID.randomUUID().toString()).updateChildren(userListings);
 
 
