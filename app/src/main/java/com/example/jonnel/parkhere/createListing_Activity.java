@@ -1,6 +1,7 @@
 package com.example.jonnel.parkhere;
 
         import android.content.Context;
+        import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.view.View;
@@ -99,8 +100,13 @@ public class createListing_Activity extends AppCompatActivity {
                 //userListings.put("endDate:", getIntent().getExtras().getString("endDate"));
                 //userListings.put("e-mail:",user.getEmail());
                 //userListings.put("userID:",uid);
-                //userListings.put("parking spot", spot);
-                dataRef.child("User Id: "+ uid).child("Parking Spot Listing:" + hash).setValue(spot);
+                //userListings.put("parking spot", spot)
+                dataRef.child("User Id: "+ uid).push().setValue(spot);
+                String uinqueID = dataRef.getKey();
+
+                Intent move = new Intent(createListing_Activity.this,uniqueIDActivity.class);
+                move.putExtra("UniqueId",uinqueID);
+                startActivity(move);
                //dataRef.child(UUID.randomUUID().toString()).updateChildren(userListings);
 
 
