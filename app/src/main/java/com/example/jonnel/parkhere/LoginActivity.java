@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
 
-
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -80,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
 
         // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        //mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Initialize FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
@@ -206,31 +205,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            signIn();
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
             signIn();
-            //mAuth.signInWithEmailAndPassword(email,password);
-                    /*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Context context = getApplicationContext();
-                                CharSequence failure = "Success: You were able to sign in.";
-                                int duration = Toast.LENGTH_LONG;
-                                Toast.makeText(context, failure, duration).show();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Context context = getApplicationContext();
-                                CharSequence failure = "Error: Check if password was entered correctly.";
-                                int duration = Toast.LENGTH_LONG;
-                                Toast.makeText(context, failure, duration).show();
-                            }
-                            // ...
-                        }
-                    });*/
         }
     }
 
@@ -260,20 +237,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Context context = getApplicationContext();
                             CharSequence failure = "Success: You were able to sign in.";
                             int duration = Toast.LENGTH_LONG;
-
                             Toast.makeText(context, failure, duration).show();
                             startMenu();
-
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Context context = getApplicationContext();
                             CharSequence failure = "Error: Check if password was entered correctly.";
-                            int duration = Toast.LENGTH_SHORT;
-
+                            int duration = Toast.LENGTH_LONG;
                             Toast.makeText(context, failure, duration).show();
                         }
-
                         // ...
                     }
                 });

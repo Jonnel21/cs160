@@ -1,5 +1,7 @@
 package com.example.jonnel.parkhere;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class UserActivity extends AppCompatActivity {
     private Button signOutButton;
     private TextView helloUserText;
+    private Button createListing;
+    private Button profileButton;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -24,8 +28,9 @@ public class UserActivity extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         signOutButton = (Button) findViewById(R.id.signoutButton);
+        createListing = (Button) findViewById(R.id.createButton);
+        profileButton = (Button) findViewById(R.id.profileButton);
         helloUserText = (TextView) findViewById(R.id.emailText);
-
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -43,14 +48,44 @@ public class UserActivity extends AppCompatActivity {
             }
         };
 
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profile();
+                //String Test = "hehexd";
+                //DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+                //dataRef.child(Test).setValue(0);
+            }
+        });
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOutButton();
             }
         });
+        createListing.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startCreateListing();
+            }
+        }));
 
 
+    }
+
+
+
+    private void profile()
+    {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void startCreateListing()
+    {
+        Intent intent = new Intent(this, TimeActivity.class);
+        startActivity(intent);
     }
 
     private void signOutButton(){

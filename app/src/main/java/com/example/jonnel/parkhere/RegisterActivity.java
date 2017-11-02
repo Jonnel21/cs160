@@ -63,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
     // UI references.
     private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mFirstView;
+    private AutoCompleteTextView mLastView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -80,6 +82,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         setContentView(R.layout.activity_register);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mFirstView = (AutoCompleteTextView) findViewById(R.id.firstName);
+        mLastView = (AutoCompleteTextView) findViewById(R.id.lastName);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -167,6 +171,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String firstName = mFirstView.getText().toString();
+        String lastName = mLastView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -183,7 +189,17 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        }
+        if (TextUtils.isEmpty(firstName)) {
+            mFirstView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(lastName)) {
+            mLastView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        }else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
