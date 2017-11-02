@@ -6,33 +6,36 @@ package com.example.jonnel.parkhere;
 
 public class PSpot {
 
-    private double price;
-    private String status;
-    private String address;
-    private String date;
-    private String time;
+    public double price;
+    public String status;
+    public String address;
+    public String date;
+    public String time;
+    public String endTime;
+    public String endDate;
 
     // creates empty parking spot
     public PSpot()
     {
         price = 0;
-        status = null;
         address = null;
         date = null;
+        endDate = null;
         time = null;
+        endTime = null;
 
     }
 
     // creates parking spot based on the parameters
-    public PSpot(double price, String status, String address, String date, String time)
+    public PSpot(double price, String address, String date, String endDate, String time, String endTime)
     {
         this.price = price;
-        this.status = status;
         this.address = address;
         this.date = date;
+        this.endDate=endDate;
         this.time = time;
+        this.endTime= endTime;
     }
-
 
     public double getPrice()
     {
@@ -59,10 +62,14 @@ public class PSpot {
         return time;
     }
 
+
+
     public void setPrice(double price) { this.price = price; }
     public void setStatus(String status) { this.status = status; }
     public void setAddress(String address) { this.address = address; }
     public void setDate(String date) { this.date = date; }
-    public void setTime(String time) { this.time = time; }
 
+    public void setDat(String endDate) { this.endDate = endDate; }
+    public void setTimee(String time) { this.time = time; }
+    public void setTime(String endTime) { this.endTime = endTime; }
 }

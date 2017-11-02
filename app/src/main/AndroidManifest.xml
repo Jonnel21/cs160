@@ -67,6 +67,8 @@
             android:name=".CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EndTime" />
+        <activity android:name=".EndDate"></activity>
     </application>
 
 </manifest>

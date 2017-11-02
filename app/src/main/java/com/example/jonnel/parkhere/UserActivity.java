@@ -1,7 +1,11 @@
 package com.example.jonnel.parkhere;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import java.util.Map;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import com.google.firebase.database.Query;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+
+
 
 public class UserActivity extends AppCompatActivity {
     private Button signOutButton;
@@ -29,7 +37,7 @@ public class UserActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         signOutButton = (Button) findViewById(R.id.signoutButton);
         createListing = (Button) findViewById(R.id.createButton);
-       // profileButton = (Button) findViewById(R.id.profileButton);
+        profileButton = (Button) findViewById(R.id.profile);
         helloUserText = (TextView) findViewById(R.id.emailText);
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -47,17 +55,16 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         };
-/*
+
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profile();
-                //String Test = "hehexd";
-                //DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
-                //dataRef.child(Test).setValue(0);
+
+              //  profile();
+
             }
         });
-*/
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

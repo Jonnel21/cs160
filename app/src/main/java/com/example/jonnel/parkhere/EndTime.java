@@ -15,13 +15,13 @@ import android.widget.Toast;
 //import com.google.firebase.database.DatabaseReference;
 //import com.google.firebase.database.FirebaseDatabase;
 
-public class TimeActivity extends AppCompatActivity {
+public class EndTime extends AppCompatActivity {
     private Button nextButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time);
-        Intent toStartDate = new Intent(TimeActivity.this, CalendarActivity.class);
+        setContentView(R.layout.activity_end_time);
+        Intent toStartDate = new Intent(this, CalendarActivity.class);
         nextButton = (Button) findViewById(R.id.myButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,7 @@ public class TimeActivity extends AppCompatActivity {
         String am = "AM";
         String pm = "PM";
         String time;
-        Intent toEndTime = new Intent(this, EndTime.class);
+        Intent toStartDate = new Intent(this, CalendarActivity.class);
         String min;
         if( minute < 10)
         {
@@ -76,8 +76,17 @@ public class TimeActivity extends AppCompatActivity {
             time = hour + ":" + min + am;
         }
         //String time = hour + ":" + minute;
-        toEndTime.putExtra("startTime",time);
-        startActivity(toEndTime);
+        String startTime = getIntent().getExtras().getString("startTime");
+
+        toStartDate.putExtra("endTime",time);
+        toStartDate.putExtra("startTime",startTime);
+
+
+
+
+
+
+        startActivity(toStartDate);
     }
 
 }

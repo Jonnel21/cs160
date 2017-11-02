@@ -16,7 +16,7 @@ import android.widget.Toast;
 //import com.google.firebase.database.DatabaseReference;
 //import com.google.firebase.database.FirebaseDatabase;
 
-public class CalendarActivity extends AppCompatActivity {
+public class EndDate extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +36,12 @@ public class CalendarActivity extends AppCompatActivity {
         int month = datePicker1.getMonth() + 1;
         int day = datePicker1.getDayOfMonth();
 
-        String myTime = getIntent().getExtras().getString("time");
+       // String myTime = getIntent().getExtras().getString("time");
 
         String date = month + "/" + day + "/" + year;
 
 
-        Intent cal2 = new Intent(CalendarActivity.this, EndDate.class);
+        Intent cal2 = new Intent(this, createListing_Activity.class);
         //toEndTime.putExtra("startYear", datePicker1.getYear());
         //toEndTime.putExtra("startMonth", datePicker1.getMonth());
         //toEndTime.putExtra("startDay", datePicker1.getDayOfMonth());
@@ -54,13 +54,15 @@ public class CalendarActivity extends AppCompatActivity {
 
         String startTime = getIntent().getExtras().getString("startTime");
         String endTime = getIntent().getExtras().getString("endTime");
+        String startDate = getIntent().getExtras().getString("beginDate");
 
 
 
 
         cal2.putExtra("startTime",startTime);
         cal2.putExtra("endTime",endTime);
-        cal2.putExtra("beginDate",date );
+        cal2.putExtra("beginDate",startDate );
+        cal2.putExtra("endDate",date );
         startActivity(cal2);
 
     }
