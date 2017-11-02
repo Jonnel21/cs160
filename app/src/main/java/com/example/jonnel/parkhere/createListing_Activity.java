@@ -1,13 +1,21 @@
 package com.example.jonnel.parkhere;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.Context;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.TextView;
+        import android.widget.Toast;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import java.util.HashMap;
+        import java.util.Map;
+        import com.google.firebase.analytics.FirebaseAnalytics;
+        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.auth.FirebaseUser;
+
 
 public class createListing_Activity extends AppCompatActivity {
     Button createListing;
@@ -18,6 +26,11 @@ public class createListing_Activity extends AppCompatActivity {
     double price;
     private TextView time;
     private TextView date;
+    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+    Map<String, Object> userListings = new HashMap<>();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +41,12 @@ public class createListing_Activity extends AppCompatActivity {
         date = (TextView) findViewById(R.id.myDate);
         date.setText(getIntent().getExtras().getString("date"));
 
+
+
         createListing = findViewById(R.id.submit);
         address_text = findViewById(R.id.address);
         price_text =  findViewById(R.id.price);
+
 
         createListing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +70,18 @@ public class createListing_Activity extends AppCompatActivity {
                     System.out.println("Error: Please fill in all values");
                 }
 
+                userListings.put("address:", address);
+                userListings.put("price:", price);
+                userListings.put("time:", getIntent().getExtras().getString("time"));
+                userListings.put("date:", getIntent().getExtras().getString("date"));
+                userListings.put("e-mail:",user.getEmail());
+                dataRef.child(uid).setValue(userListings);
+
+
+
+
             }
         });
     }
 }
+
