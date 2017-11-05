@@ -1,22 +1,22 @@
 package com.example.jonnel.parkhere;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import java.util.HashMap;
-        import java.util.Map;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.auth.FirebaseUser;
-        import java.util.UUID;
-
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+import java.util.Map;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.util.UUID;
 
 public class createListing_Activity extends AppCompatActivity {
     Button createListing;
@@ -29,6 +29,8 @@ public class createListing_Activity extends AppCompatActivity {
     private TextView endTime;
     private TextView startDate;
     private TextView endDate;
+    private static String key = " ";
+    private static String childKey="";
 
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
 
@@ -73,8 +75,8 @@ public class createListing_Activity extends AppCompatActivity {
                 String hash = UUID.randomUUID().toString().substring(0,12);
                 //spot = new PSpot(price, null, address, null, null);
 
-                PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"));
-                //PSpot test = new PSpot(price,address,bDate,eDate,sTime,eTime);
+                 spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"));
+
 
                 if(address_text != null && price_text != null) {
                     Context context = getApplicationContext();
@@ -100,21 +102,27 @@ public class createListing_Activity extends AppCompatActivity {
                 //userListings.put("endDate:", getIntent().getExtras().getString("endDate"));
                 //userListings.put("e-mail:",user.getEmail());
                 //userListings.put("userID:",uid);
-                //userListings.put("parking spot", spot)
-                dataRef.child("User Id: "+ uid).push().setValue(spot);
-                String uinqueID = dataRef.getKey();
+                //userListings.put("parking spot", spot);
+                //dataRef.child("User Id: "+ uid).child("Parking Spot Listing:" + hash).setValue(spot);
+                //dataRef.child(UUID.randomUUID().toString()).updateChildren(userListings);
+                //"database reference var". child("user " + uid).push.setvalue(spo)
+                DatabaseReference userRef = dataRef.child("User Id: " + uid);
+                DatabaseReference listingRef = userRef.push();
 
-                Intent move = new Intent(createListing_Activity.this,uniqueIDActivity.class);
-                move.putExtra("UniqueId",uinqueID);
-                startActivity(move);
-               //dataRef.child(UUID.randomUUID().toString()).updateChildren(userListings);
-
+                listingRef.setValue(spot);
+                key = listingRef.getKey();
 
 
 
 
             }
         });
+        Intent data = new Intent("name").putExtra("key", key);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(data);
     }
+    public static String getKey()
+    {
+        return key;
+    }
+    public static String getChildKey(){return childKey;}
 }
-

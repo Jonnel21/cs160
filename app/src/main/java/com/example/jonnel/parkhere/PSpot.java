@@ -9,8 +9,8 @@ public class PSpot {
     public double price;
     public String status;
     public String address;
-    public String date;
-    public String time;
+    public String startDate;
+    public String startTime;
     public String endTime;
     public String endDate;
 
@@ -19,21 +19,21 @@ public class PSpot {
     {
         price = 0;
         address = null;
-        date = null;
+        startDate = null;
         endDate = null;
-        time = null;
+        startTime = null;
         endTime = null;
 
     }
 
-    // creates parking spot based on the parameters
-    public PSpot(double price, String address, String date, String endDate, String time, String endTime)
+    // creates parking spot based on the parameterss
+    public PSpot(double price, String address, String startDate, String endDate, String startTime, String endTime)
     {
         this.price = price;
         this.address = address;
-        this.date = date;
+        this.startDate = startDate;
         this.endDate=endDate;
-        this.time = time;
+        this.startTime = startTime;
         this.endTime= endTime;
     }
 
@@ -52,14 +52,22 @@ public class PSpot {
         return address;
     }
 
-    public String getDate()
+    public String getstartDate()
     {
-        return date;
+        return startDate;
+    }
+    public String getendDate()
+    {
+        return endDate;
     }
 
-    public String getTime()
+    public String getStartTimeTime()
     {
-        return time;
+        return startTime;
+    }
+    public String getEndTime()
+    {
+        return endTime;
     }
 
 
@@ -67,9 +75,13 @@ public class PSpot {
     public void setPrice(double price) { this.price = price; }
     public void setStatus(String status) { this.status = status; }
     public void setAddress(String address) { this.address = address; }
-    public void setDate(String date) { this.date = date; }
-
-    public void setDat(String endDate) { this.endDate = endDate; }
-    public void setTimee(String time) { this.time = time; }
+    public void setStartDate(String startDate) { this.startDate = startDate; }
+    public void setEndDate(String endDate) { this.endDate = endDate; }
+    public void setTimee(String startTime) { this.startTime = startTime; }
     public void setTime(String endTime) { this.endTime = endTime; }
+
+    public String toString()
+    {
+        return "Parking Spot: $" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate;
+    }
 }
