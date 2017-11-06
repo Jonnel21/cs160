@@ -83,8 +83,11 @@ public class SearchListingActivity extends AppCompatActivity {
 
                 for (DataSnapshot ds : listings) {
                     PSpot spot = ds.getValue(PSpot.class);
-                    array.add(spot.toString()); // adds user listing to list view
-                    bookings.add(ds);
+                    if(spot.availablity == true && !spot.owner.equals(uid)) {
+                        array.add(spot.ownerToString()); // adds user listing to list view
+                        bookings.add(ds);
+                    }
+
                 }
                 i++;
             }
@@ -102,6 +105,7 @@ public class SearchListingActivity extends AppCompatActivity {
                         adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 update.child("availablity").getRef().setValue(false);
+                                update.child("reserve").getRef().setValue(uid);
                                 adapter.notifyDataSetChanged();
 
                             }});

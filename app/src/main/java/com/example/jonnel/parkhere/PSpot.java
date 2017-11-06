@@ -19,6 +19,8 @@ public class PSpot {
     public String endTime;
     public String endDate;
     public Boolean availablity = true;
+    public String owner;
+    public String reserve;
 
     // creates empty parking spot
     public PSpot()
@@ -26,7 +28,7 @@ public class PSpot {
 
     }
 
-    public PSpot(double price, String address, String startDate, String endDate, String startTime, String endTime, Boolean availablity)
+    public PSpot(double price, String address, String startDate, String endDate, String startTime, String endTime, Boolean availablity,String owner, String reserve)
     {
         this.price = price;
         this.address = address;
@@ -35,6 +37,8 @@ public class PSpot {
         this.startTime = startTime;
         this.endTime= endTime;
         this.availablity = availablity;
+        this.owner = owner;
+        this.reserve = reserve;
     }
 
     public double getPrice()
@@ -78,10 +82,19 @@ public class PSpot {
     public void setStartDate(String startDate) { this.startDate = startDate; }
     public void setEndDate(String endDate) { this.endDate = endDate; }
     public void setAvailablity(boolean availablity){this.availablity=availablity;}
+    public void setOwner(String owner){this.owner=owner;}
 
     public String toString()
     {
         return "Parking Spot" + "\n"+ "$" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+availablity;
     }
+    public String ownerToString() {
+        return "Parking Spot" + "\n"+"Owner:"+owner +"\n"+ "$" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+availablity;
+    }
+    public String rentToString()
+    {
+        return "Parking Spot" + "\n"+"Owner:"+owner +"\n"+"Renter: " + reserve+ "\n"+ "$" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+availablity;
+    }
+
 }
 

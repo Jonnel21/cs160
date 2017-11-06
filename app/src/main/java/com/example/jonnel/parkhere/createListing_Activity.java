@@ -61,7 +61,7 @@ public class createListing_Activity extends AppCompatActivity {
                 address = address_text.getText().toString();
                 price = Double.parseDouble(price_text.getText().toString());
 
-                PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"),true);
+                PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"),true,uid,null);
 
                 if(address_text != null && price_text != null) {
                     toastMessage("You have created Parking Spot!");
