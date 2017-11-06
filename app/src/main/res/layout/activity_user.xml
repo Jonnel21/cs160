@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jonnel.parkhere.UserActivity">
+
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/username"
+        app:layout_constraintBottom_toTopOf="@+id/searchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/searchlisting"
+        app:layout_constraintBottom_toTopOf="@+id/createButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailText" />
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createlisting"
+        app:layout_constraintBottom_toTopOf="@+id/deleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="@string/deletelisting"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createButton" />
+
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:text="@string/profile"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createButton" />
+
+
+
+    <Button
+        android:id="@+id/signoutButton"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:text="@string/signout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"></Button>
+
+</android.support.constraint.ConstraintLayout>

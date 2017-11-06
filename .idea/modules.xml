@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://S:\StudioProjects\kill me\ParkHereRepo.iml" filepath="S:\StudioProjects\kill me\ParkHereRepo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WelcomePage/WelcomePage.iml" filepath="$PROJECT_DIR$/WelcomePage/WelcomePage.iml" />
+      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-latestbuild\WelcomePage\WelcomePage.iml" filepath="C:\Users\Jonnel\Desktop\cs160-latestbuild\WelcomePage\WelcomePage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-latestbuild\app\app.iml" filepath="C:\Users\Jonnel\Desktop\cs160-latestbuild\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs160-latestbuild.iml" filepath="$PROJECT_DIR$/cs160-latestbuild.iml" />
+      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-latestbuild\kill me.iml" filepath="C:\Users\Jonnel\Desktop\cs160-latestbuild\kill me.iml" />
+    </modules>
+  </component>
+</project>
