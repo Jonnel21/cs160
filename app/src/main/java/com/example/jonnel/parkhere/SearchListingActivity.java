@@ -1,12 +1,17 @@
 package com.example.jonnel.parkhere;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.ContactsContract;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -62,8 +67,9 @@ public class SearchListingActivity extends AppCompatActivity {
 
     }
 
-    private void showData(DataSnapshot dataSnapshot){
+    private void showData(final DataSnapshot dataSnapshot){
         array.clear();
+        final ArrayList<DataSnapshot> bookings = new ArrayList();
         // Store users key in array list
         for(DataSnapshot d: dataSnapshot.getChildren()) {
             //PSpot spot = d.getValue(PSpot.class);
@@ -78,13 +84,30 @@ public class SearchListingActivity extends AppCompatActivity {
                 for (DataSnapshot ds : listings) {
                     PSpot spot = ds.getValue(PSpot.class);
                     array.add(spot.toString()); // adds user listing to list view
+                    bookings.add(ds);
                 }
                 i++;
             }
 
-                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
+             final   ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
                 mListView.setAdapter(adapter);
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                        AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                        adb.setTitle("Book Parking Spot?");
+                        adb.setMessage("Are you sure you want to book this parking spot");
+                        final DataSnapshot update = bookings.get(i);
+                        adb.setNegativeButton("Cancel", null);
+                        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                update.child("availablity").getRef().setValue(false);
+                                adapter.notifyDataSetChanged();
 
+                            }});
+                        adb.show();
+                    }
+                });
     }
 
 }

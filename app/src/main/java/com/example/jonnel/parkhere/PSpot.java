@@ -77,6 +77,7 @@ public class PSpot {
     public void setTime(String endTime) { this.endTime = endTime; }
     public void setStartDate(String startDate) { this.startDate = startDate; }
     public void setEndDate(String endDate) { this.endDate = endDate; }
+    public void setAvailablity(boolean availablity){this.availablity=availablity;}
 
     public String toString()
     {
