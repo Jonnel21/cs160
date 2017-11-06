@@ -1,5 +1,10 @@
 package com.example.jonnel.parkhere;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -33,10 +38,15 @@ public class SearchListingActivity extends AppCompatActivity {
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
+
         array = new ArrayList<>();
         mUsers = new ArrayList<>();
         lKeys = new ArrayList<>();
         key = createListing_Activity.getKey(); // gets the listing hash key
+
+        key = createListing_Activity.getKey();
+        System.out.println("SearchListingClass: " + key);
+        System.out.println("User Id: " + uid);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,6 +59,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void showData(DataSnapshot dataSnapshot){
@@ -75,7 +86,6 @@ public class SearchListingActivity extends AppCompatActivity {
                 mListView.setAdapter(adapter);
 
     }
-
 
 }
 

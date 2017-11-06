@@ -1,36 +1,33 @@
 package com.example.jonnel.parkhere;
-
-        import android.content.Context;
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import java.util.HashMap;
-        import java.util.Map;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.auth.FirebaseUser;
-        import java.util.UUID;
-
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class createListing_Activity extends AppCompatActivity {
     Button createListing;
     EditText address_text;
     EditText price_text;
+    PSpot spot;
     String address;
-    TextView startTime;
-    TextView endTime;
-    TextView startDate;
-    TextView endDate;
     double price;
-    private static String key;
+    private TextView startTime;
+    private TextView endTime;
+    private TextView startDate;
+    private TextView endDate;
+    private static String key = " ";
+    private static String childKey="";
 
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +85,9 @@ public class createListing_Activity extends AppCompatActivity {
         });
     }
 
-    public static String getKey()
-    {
+    public static String getKey(){
         return key;
-    }
+}
 
     // helper method to create toasts
     private void toastMessage(String str){
@@ -100,5 +96,8 @@ public class createListing_Activity extends AppCompatActivity {
         Toast.makeText(context, str, duration).show();
 
     }
-}
 
+
+
+    public static String getChildKey(){return childKey;}
+}

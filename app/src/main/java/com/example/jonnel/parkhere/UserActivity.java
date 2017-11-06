@@ -15,13 +15,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class UserActivity extends AppCompatActivity {
     private Button signOutButton;
+    private TextView helloUserText;
     private Button createListing;
     private Button profileButton;
-    private Button deleteListing;
-    private Button searchListing;
-    private TextView helloUserText;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private Button deleteListing;
+    private Button searchListing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,12 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         auth=FirebaseAuth.getInstance();
-        deleteListing = findViewById(R.id.deleteButton);
-        searchListing = findViewById(R.id.searchButton);
-        signOutButton = findViewById(R.id.signoutButton);
-        createListing = findViewById(R.id.createButton);
+        deleteListing = (Button) findViewById(R.id.deleteButton);
+        signOutButton = (Button) findViewById(R.id.signoutButton);
+        createListing = (Button) findViewById(R.id.createButton);
         // profileButton = (Button) findViewById(R.id.profileButton);
-        helloUserText = findViewById(R.id.emailText);
-
+        helloUserText = (TextView) findViewById(R.id.emailText);
+        searchListing = findViewById(R.id.searchButton);
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -52,17 +51,7 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         };
-/*
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                profile();
-                //String Test = "hehexd";
-                //DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
-                //dataRef.child(Test).setValue(0);
-            }
-        });
-*/
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +78,8 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteListingNow() {
+    private void deleteListingNow()
+    {
         Intent deleteIntent = new Intent(this, DeleteActivity.class);
         startActivity(deleteIntent);
 
@@ -108,6 +98,7 @@ public class UserActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TimeActivity.class);
         startActivity(intent);
     }
+
 
     private void startSearchListing(){
         Intent intent = new Intent(this, SearchListingActivity.class);
