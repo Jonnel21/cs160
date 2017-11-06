@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 public class TimeActivity extends AppCompatActivity {
     private Button nextButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +29,6 @@ public class TimeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toFirstCalendar();
-                // Context context = getApplicationContext();
-                //CharSequence failure = "Testing.";
-                //int duration = Toast.LENGTH_LONG;
-                //Toast.makeText(context, failure, duration).show();
 
             }
         });
@@ -78,6 +75,7 @@ public class TimeActivity extends AppCompatActivity {
         //String time = hour + ":" + minute;
         toEndTime.putExtra("startTime",time);
         startActivity(toEndTime);
+
     }
 
 }

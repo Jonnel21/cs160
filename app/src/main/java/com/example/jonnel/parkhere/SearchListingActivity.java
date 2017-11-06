@@ -75,45 +75,44 @@ public class SearchListingActivity extends AppCompatActivity {
             //PSpot spot = d.getValue(PSpot.class);
             mUsers.add(String.valueOf(d.getKey()));
         }
-            int i = 0;
-            while(i < mUsers.size()) {
-                DataSnapshot userId = dataSnapshot.child(mUsers.get(i));
-                Iterable<DataSnapshot> listings = userId.getChildren();
+        int i = 0;
+        while(i < mUsers.size()) {
+            DataSnapshot userId = dataSnapshot.child(mUsers.get(i));
+            Iterable<DataSnapshot> listings = userId.getChildren();
 
 
-                for (DataSnapshot ds : listings) {
-                    PSpot spot = ds.getValue(PSpot.class);
-                    if(spot.availablity == true && !spot.owner.equals(uid)) {
-                        array.add(spot.ownerToString()); // adds user listing to list view
-                        bookings.add(ds);
-                    }
-
+            for (DataSnapshot ds : listings) {
+                PSpot spot = ds.getValue(PSpot.class);
+                if(spot.availablity == true && !spot.owner.equals(uid)) {
+                    array.add(spot.ownerToString());
+                    bookings.add(ds);
                 }
-                i++;
+
             }
+            i++;
+        }
 
-            
-             final   ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
-                mListView.setAdapter(adapter);
-                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                        AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
-                        adb.setTitle("Book Parking Spot?");
-                        adb.setMessage("Are you sure you want to book this parking spot");
-                        final DataSnapshot update = bookings.get(i);
-                        adb.setNegativeButton("Cancel", null);
-                        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                update.child("availablity").getRef().setValue(false);
-                                update.child("reserve").getRef().setValue(uid);
-                                adapter.notifyDataSetChanged();
+        final   ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                adb.setTitle("Book Parking Spot?");
+                adb.setMessage("Are you sure you want to book this parking spot");
+                final DataSnapshot update = bookings.get(i);
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        update.child("availablity").getRef().setValue(false);
+                        update.child("reserve").getRef().setValue(uid);
 
-                            }});
-                        adb.show();
-                    }
-                });
+                        adapter.notifyDataSetChanged();
+
+                    }});
+                adb.show();
+            }
+        });
     }
 
 }
-

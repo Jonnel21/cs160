@@ -1,5 +1,4 @@
 package com.example.jonnel.parkhere;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,7 +23,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+
 import java.util.ArrayList;
 
 public class DeleteActivity extends AppCompatActivity {
@@ -44,7 +46,7 @@ public class DeleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_listing);
 
-         myRef = FirebaseDatabase.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -68,6 +70,7 @@ public class DeleteActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void showData(final DataSnapshot dataSnapshot) {
@@ -87,7 +90,7 @@ public class DeleteActivity extends AppCompatActivity {
                 AlertDialog.Builder adb=new AlertDialog.Builder(DeleteActivity.this);
                 adb.setTitle("Delete?");
                 adb.setMessage("Are you sure you want to cancel your spot?");
-               final DataSnapshot remove =deletion.get(position);
+                final DataSnapshot remove =deletion.get(position);
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -102,5 +105,8 @@ public class DeleteActivity extends AppCompatActivity {
 
 
     }
-}
 
+
+
+
+}

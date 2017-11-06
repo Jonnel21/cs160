@@ -17,16 +17,13 @@ import android.widget.Toast;
 //import com.google.firebase.database.FirebaseDatabase;
 
 public class EndDate extends AppCompatActivity {
-
+    //public static EndDate instance = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_end_date);
 
-        Context context = getApplicationContext();
-        //CharSequence failure = getIntent().getExtras("name")
-        //int duration = Toast.LENGTH_LONG;
-        //Toast.makeText(context, data, duration).show();
+
 
     }
 
@@ -36,7 +33,7 @@ public class EndDate extends AppCompatActivity {
         int month = datePicker1.getMonth() + 1;
         int day = datePicker1.getDayOfMonth();
 
-       // String myTime = getIntent().getExtras().getString("time");
+        // String myTime = getIntent().getExtras().getString("time");
 
         String date = month + "/" + day + "/" + year;
 
@@ -66,4 +63,5 @@ public class EndDate extends AppCompatActivity {
         startActivity(cal2);
 
     }
+
 }

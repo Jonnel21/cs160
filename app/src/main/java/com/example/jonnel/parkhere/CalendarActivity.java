@@ -21,12 +21,10 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //instance = this;
         setContentView(R.layout.activity_calendar);
 
-        Context context = getApplicationContext();
-        //CharSequence failure = getIntent().getExtras("name")
-        //int duration = Toast.LENGTH_LONG;
-        //Toast.makeText(context, data, duration).show();
+
 
     }
 
@@ -63,5 +61,8 @@ public class CalendarActivity extends AppCompatActivity {
         cal2.putExtra("beginDate",date );
         startActivity(cal2);
 
+
     }
+
+
 }
