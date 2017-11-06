@@ -33,10 +33,6 @@ public class createListing_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_listing_);
-        final String sTime;
-        final String eTime;
-        final String bDate;
-        final String eDate;
 
         startTime = (TextView) findViewById(R.id.startTime);
         startTime.setText(getIntent().getExtras().getString("startTime"));
@@ -65,7 +61,7 @@ public class createListing_Activity extends AppCompatActivity {
                 address = address_text.getText().toString();
                 price = Double.parseDouble(price_text.getText().toString());
 
-                PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"));
+                PSpot spot = new PSpot(price,address,getIntent().getExtras().getString("beginDate"),getIntent().getExtras().getString("endDate"),getIntent().getExtras().getString("startTime"),getIntent().getExtras().getString("endTime"),true);
 
                 if(address_text != null && price_text != null) {
                     toastMessage("You have created Parking Spot!");
@@ -99,5 +95,5 @@ public class createListing_Activity extends AppCompatActivity {
 
 
 
-    public static String getChildKey(){return childKey;}
+
 }

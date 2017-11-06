@@ -18,6 +18,7 @@ public class PSpot {
 
     public String endTime;
     public String endDate;
+    public Boolean availablity = true;
 
     // creates empty parking spot
     public PSpot()
@@ -25,7 +26,7 @@ public class PSpot {
 
     }
 
-    public PSpot(double price, String address, String startDate, String endDate, String startTime, String endTime)
+    public PSpot(double price, String address, String startDate, String endDate, String startTime, String endTime, Boolean availablity)
     {
         this.price = price;
         this.address = address;
@@ -33,6 +34,7 @@ public class PSpot {
         this.endDate=endDate;
         this.startTime = startTime;
         this.endTime= endTime;
+        this.availablity = availablity;
     }
 
     public double getPrice()
@@ -78,7 +80,7 @@ public class PSpot {
 
     public String toString()
     {
-        return "Parking Spot: $" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate;
+        return "Parking Spot" + "\n"+ "$" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+availablity;
     }
 }
 
