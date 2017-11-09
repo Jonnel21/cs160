@@ -39,16 +39,17 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if( user == null)
+                if( user != null)
                 {
-                    startActivity(new Intent(UserActivity.this,LoginActivity.class));
-                    finish();
-                }
-                else
-                {
+                    //startActivity(new Intent(UserActivity.this,LoginActivity.class));
+                    //finish();
+                //}
+                //else
+                //{
 
                     helloUserText.setText(String.format("%s %s", "User: ", user.getEmail()));
                 }
+
             }
         };
 
@@ -107,6 +108,9 @@ public class UserActivity extends AppCompatActivity {
 
     private void signOutButton(){
         auth.signOut();
+        startActivity(new Intent(UserActivity.this,WelcomeActivity.class));
+        finish();
+
     }
 
     protected void onResume()

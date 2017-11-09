@@ -42,14 +42,14 @@ public class UserActivityTest {
 
         onView(withId(R.id.timePicker1)).check(matches(isDisplayed()));
     }
-    /*
+
     @Test
     public void signOutButton_opensLoginUI() throws Exception{
         onView(withId(R.id.signoutButton)).perform(click());
 
-        onView(withId(R.id.login_progress)).check(matches(isDisplayed()));
+        onView(withId(R.id.textView)).check(matches(isDisplayed()));
     }
-*/
+
 
 
 }

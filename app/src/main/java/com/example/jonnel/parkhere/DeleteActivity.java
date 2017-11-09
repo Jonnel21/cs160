@@ -49,8 +49,9 @@ public class DeleteActivity extends AppCompatActivity {
         myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.deleteList);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
-
+        if(user!=null) {
+            uid = user.getUid();
+        }
         array = new ArrayList<>();
 
         key = createListing_Activity.getKey();

@@ -42,8 +42,9 @@ public class SearchListingActivity extends AppCompatActivity {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
-
+        if(user!=null) {
+            uid = user.getUid();
+        }
         array = new ArrayList<>();
         mUsers = new ArrayList<>();
         lKeys = new ArrayList<>();
