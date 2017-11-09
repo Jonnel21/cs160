@@ -75,11 +75,17 @@ public class EndTime extends AppCompatActivity {
         {
             time = hour + ":" + min + am;
         }
-        //String time = hour + ":" + minute;
-        String startTime = getIntent().getExtras().getString("startTime");
+        Bundle bundle= getIntent().getExtras();
+        if(bundle!=null)
+        {
+            //String time = hour + ":" + minute;
+            String startTime = bundle.getString("startTime");
 
-        toStartDate.putExtra("endTime",time);
-        toStartDate.putExtra("startTime",startTime);
+            toStartDate.putExtra("endTime", time);
+            toStartDate.putExtra("startTime", startTime);
+
+        }
+
 
 
 

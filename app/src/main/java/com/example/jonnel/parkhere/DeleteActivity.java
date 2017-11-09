@@ -44,10 +44,10 @@ public class DeleteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_listing);
+        setContentView(R.layout.activity_delete);
 
         myRef = FirebaseDatabase.getInstance().getReference();
-        mListView = findViewById(R.id.Listview);
+        mListView = findViewById(R.id.deleteList);
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 

@@ -46,13 +46,15 @@ public class EndDate extends AppCompatActivity {
         //toEndTime.putExtra("minute",getIntent().getStringExtra("startMinute"));
         //Bundle dateBundle1 = getIntent().getExtras();
 
-
-
-
-        String startTime = getIntent().getExtras().getString("startTime");
-        String endTime = getIntent().getExtras().getString("endTime");
-        String startDate = getIntent().getExtras().getString("beginDate");
-
+        String startTime="";
+        String endTime="";
+        String startDate="";
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+             startTime = bundle.getString("startTime");
+             endTime = bundle.getString("endTime");
+             startDate = bundle.getString("beginDate");
+        }
 
 
 

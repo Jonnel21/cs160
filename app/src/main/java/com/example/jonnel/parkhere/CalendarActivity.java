@@ -34,7 +34,7 @@ public class CalendarActivity extends AppCompatActivity {
         int month = datePicker1.getMonth() + 1;
         int day = datePicker1.getDayOfMonth();
 
-        String myTime = getIntent().getExtras().getString("time");
+
 
         String date = month + "/" + day + "/" + year;
 
@@ -48,11 +48,13 @@ public class CalendarActivity extends AppCompatActivity {
         //Bundle dateBundle1 = getIntent().getExtras();
 
 
-
-
-        String startTime = getIntent().getExtras().getString("startTime");
-        String endTime = getIntent().getExtras().getString("endTime");
-
+        String startTime="";
+        String endTime="";
+        Bundle bundle = getIntent().getExtras();
+        if (bundle!=null) {
+            startTime = bundle.getString("startTime");
+            endTime = bundle.getString("endTime");
+        }
 
 
 
