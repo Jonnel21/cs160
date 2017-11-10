@@ -76,7 +76,7 @@ public class EndTime extends AppCompatActivity {
             time = hour + ":" + min + am;
         }
         Bundle bundle= getIntent().getExtras();
-        if(bundle!=null)
+        if(bundle!=null && isValid(time))
         {
             //String time = hour + ":" + minute;
             String startTime = bundle.getString("startTime");
@@ -84,16 +84,33 @@ public class EndTime extends AppCompatActivity {
             toStartDate.putExtra("endTime", time);
             toStartDate.putExtra("startTime", startTime);
 
+
         }
-
-
-
-
-
-
-
+        else
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+          CharSequence message = "Please pick a valid time";
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        }
         startActivity(toStartDate);
 
     }
+    public boolean isValid(String temp)
+    {
+        String tempH = "";
+        String tempM = "";
+        if(temp.contains(":")) {
+            String[] bDate = temp.split(":");
+            tempH = bDate[0];
+            tempM = bDate[1];
+            if(tempH.length() <=2 && tempH.length() >0 && tempM.length() > 0){//&& tempM.matches("[0-9]+") ){
+                if(tempH.matches("[0-9]+") || tempM.matches("[0-5][0-9]|[AM]|[PM]")) {
+                    return true;
+                }
+            }
+        }
 
+        return false;
+    }
 }

@@ -39,7 +39,9 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if( user != null)
+                if(userIsValid(user))
+
+                //if( user != null)
                 {
                     //startActivity(new Intent(UserActivity.this,LoginActivity.class));
                     //finish();
@@ -112,6 +114,9 @@ public class UserActivity extends AppCompatActivity {
         finish();
 
     }
+    public boolean userIsValid(FirebaseUser user){
+        return user != null;
+    }
 
     protected void onResume()
     {
@@ -133,3 +138,4 @@ public class UserActivity extends AppCompatActivity {
         }
     }
 }
+

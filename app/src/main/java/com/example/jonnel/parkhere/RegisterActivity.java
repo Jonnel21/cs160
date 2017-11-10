@@ -190,12 +190,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             focusView = mEmailView;
             cancel = true;
         }
-        if (TextUtils.isEmpty(firstName)) {
+        if(isNameValid(firstName)){
             mFirstView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
         }
-        if (TextUtils.isEmpty(lastName)) {
+        //if (TextUtils.isEmpty(lastName)) {
+        if(isNameValid(lastName)){
             mLastView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
@@ -241,14 +242,18 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         }
     }
 
-    private boolean isEmailValid(String email) {
+    public boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("@")&&email.contains(".");
     }
 
-    private boolean isPasswordValid(String password) {
+    public boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+    public boolean isNameValid(String name){
+        String valid = "[A-Za-z]*";
+        return name.contains(valid);
     }
 
     /**

@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 //import com.google.firebase.database.DatabaseReference;
 //import com.google.firebase.database.FirebaseDatabase;
 
@@ -57,13 +60,24 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
 
-
+        if(isValidStartDate(date)){
         cal2.putExtra("startTime",startTime);
         cal2.putExtra("endTime",endTime);
         cal2.putExtra("beginDate",date );
         startActivity(cal2);
+        }
 
+    }
+    public boolean isValidStartDate(String input) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(input.trim());
 
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
     }
 
 

@@ -38,7 +38,7 @@ public class createListing_Activity extends AppCompatActivity {
     private String eTime;
     private String sDate;
     private String eDate;
-    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+
 
     private void menu()
     {
@@ -51,6 +51,7 @@ public class createListing_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.activity_create_listing_);
 
         pastInstance=getIntent().getExtras();
@@ -124,7 +125,8 @@ public class createListing_Activity extends AppCompatActivity {
 
                 PSpot spot = new PSpot(price, address, sDate, eDate, sTime, eTime, true, uid, null);
 
-                if (address_text != null && price_text != null) {
+               // if (address_text != null && price_text != null) {
+                if(validPrice(price) && validAddress(address) && PriceBound(price)){
                     Context context = getApplicationContext();
                     CharSequence message = "You created a new parking spot"
                             + " " + "at" + " " + address + " " + "for" + " " + formatter.format(price) + " dollars";
@@ -135,7 +137,11 @@ public class createListing_Activity extends AppCompatActivity {
                     System.out.println("Price:" + " " + "$" + formatter.format(price));
                     System.out.println("Address:" + " " + address);
                 } else {
-                    System.out.println("Error: Please fill in all values");
+
+                    Context context = getApplicationContext();
+                    CharSequence message = "Invalid parking spot listing";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast.makeText(context, message, duration).show();
                 }
 
 
@@ -160,5 +166,29 @@ public class createListing_Activity extends AppCompatActivity {
     public static String getKey()
     {
         return key;
+    }
+    public boolean validPrice(double price)
+    {
+        if(price <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validAddress(String add){
+        if(add.length() > 6 && !add.isEmpty()){
+            return true;
+        }
+        return false;
+
+    }
+    public boolean PriceBound(double price)
+    {
+        if( price > 10000 )
+        {
+         return false;
+        }
+        return true;
     }
 }
