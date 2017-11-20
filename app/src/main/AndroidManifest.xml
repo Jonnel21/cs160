@@ -72,7 +72,8 @@
         <activity android:name=".DeleteActivity" />
         <activity android:name=".uniqueIDActivity" />
         <activity android:name=".SearchListingActivity" />
-        <activity android:name=".UserInfoActivity"></activity>
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".EditProfileActivity"></activity>
     </application>
 
 </manifest>
