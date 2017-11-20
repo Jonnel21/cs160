@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private Button edit;
+    private Button ChangeAccountInformation;
     private TextView fName;
     private TextView lName;
     private TextView addRESS;
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         state = findViewById(R.id.profState);
         city = findViewById(R.id.profCity);
         zip=findViewById(R.id.profZip);
+        ChangeAccountInformation=findViewById(R.id.changeAccountInformation);
         user= FirebaseAuth.getInstance().getCurrentUser();
 
         uid=user.getUid();
@@ -65,7 +67,12 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
+        ChangeAccountInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editAccountInfoNow();
+            }
+        });
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,5 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
         Intent editProfIntent = new Intent(this,EditProfileActivity.class );
         finish();
         startActivity(editProfIntent);
+    }
+    private void editAccountInfoNow(){
+        Intent editAccountIntent= new Intent(this, EditAccountActivity.class);
+        finish();
+        startActivity(editAccountIntent);
     }
 }

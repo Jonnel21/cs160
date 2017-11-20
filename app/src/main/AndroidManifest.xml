@@ -73,7 +73,8 @@
         <activity android:name=".uniqueIDActivity" />
         <activity android:name=".SearchListingActivity" />
         <activity android:name=".UserInfoActivity" />
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".EditAccountActivity"></activity>
     </application>
 
 </manifest>
