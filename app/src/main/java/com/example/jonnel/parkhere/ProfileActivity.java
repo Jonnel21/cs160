@@ -23,7 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button ChangeAccountInformation;
     private TextView fName;
     private TextView lName;
-    private TextView addRESS;
+    private TextView address;
     private TextView state;
     private TextView city;
     private TextView zip;
@@ -35,12 +35,13 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);;
-        edit = (Button)findViewById(R.id.editProf);
+        setContentView(R.layout.activity_profile);
+
         profilePicture=findViewById(R.id.profPic);
+        edit = findViewById(R.id.editProf);
         fName = findViewById(R.id.profName);
         lName = findViewById(R.id.profLastName);
-        addRESS=findViewById(R.id.profAddress);
+        address = findViewById(R.id.profAddress);
         state = findViewById(R.id.profState);
         city = findViewById(R.id.profCity);
         zip=findViewById(R.id.profZip);
@@ -56,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 fName.setText(String.format("%s %s", "First Name: ", dataSnapshot.child("First name").getValue()));
                 lName.setText(String.format("%s %s", "Last Name: ", dataSnapshot.child("Last name").getValue()));
-                addRESS.setText(String.format("%s %s", "Address: ", dataSnapshot.child("Address").getValue()));
+                address.setText(String.format("%s %s", "Address: ", dataSnapshot.child("Address").getValue()));
                 state.setText(String.format("%s %s", "State: ", dataSnapshot.child("State").getValue()));
                 city.setText(String.format("%s %s", "City: ", dataSnapshot.child("City").getValue()));
                 zip.setText(String.format("%s %s", "Zip: ", dataSnapshot.child("Zip").getValue()));
@@ -72,11 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
 
         ChangeAccountInformation.setOnClickListener(new View.OnClickListener() {
             @Override

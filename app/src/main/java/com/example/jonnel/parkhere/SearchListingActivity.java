@@ -98,7 +98,11 @@ public class SearchListingActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                String ownerId = getOwnerParser(array.get(i));
+                Intent otherUser = new Intent(getApplicationContext(), OtherUserProfileActivity.class);
+                otherUser.putExtra("id", ownerId);
+                startActivityForResult(otherUser, 0);
+                /*AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
                 adb.setTitle("Book Parking Spot?");
                 adb.setMessage("Are you sure you want to book this parking spot");
                 final DataSnapshot update = bookings.get(i);
@@ -109,11 +113,22 @@ public class SearchListingActivity extends AppCompatActivity {
                         update.child("reserve").getRef().setValue(uid);
 
                         adapter.notifyDataSetChanged();
-
-                    }});
-                adb.show();
+                    }});*/
+                //adb.show();
             }
         });
+    }
+
+    /**
+     * helper method to parse string of owner to
+     * retrieve id of user
+     * @param str
+     * @return
+     */
+    private String getOwnerParser(String str){
+        int indexOfColon = str.indexOf(":");
+        String owner = str.substring(indexOfColon + 1 , 47); // TODO: fix hardcoded ending index.
+        return owner;
     }
 
 }

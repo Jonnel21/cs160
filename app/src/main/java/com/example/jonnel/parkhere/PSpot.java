@@ -29,7 +29,7 @@ public class PSpot {
         endDate = null;
         startTime = null;
         endTime = null;
-        owner = null;
+        owner = "";
         reserve = null;
 
     }
@@ -73,6 +73,7 @@ public class PSpot {
     {
         return endTime;
     }
+    public String getOwner() { return owner; }
 
     public void setPrice(double price) { this.price = price; }
     public void setStatus(String status) { this.status = status; }
