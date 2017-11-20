@@ -60,7 +60,10 @@ public class ProfileActivity extends AppCompatActivity {
                 state.setText(String.format("%s %s", "State: ", dataSnapshot.child("State").getValue()));
                 city.setText(String.format("%s %s", "City: ", dataSnapshot.child("City").getValue()));
                 zip.setText(String.format("%s %s", "Zip: ", dataSnapshot.child("Zip").getValue()));
-                profilePicture.setImageURI(Uri.parse(dataSnapshot.child("photoURI").getValue().toString()));
+                if(dataSnapshot.child("photoURI").getValue()!=null) {
+                    profilePicture.setImageURI(Uri.parse(dataSnapshot.child("photoURI").getValue().toString()));
+                }
+                profilePicture.invalidate();
 
             }
 

@@ -108,6 +108,7 @@ public class UserInfoActivity extends AppCompatActivity {
             userRef.child("City").setValue(city);
             userRef.child("State").setValue(state);
             userRef.child("Zip").setValue(zip);
+            userRef.child("photoURI").setValue(null);
 
         Context context = getApplicationContext();
             CharSequence failure = "You have completed the setup. Please log in";

@@ -57,7 +57,7 @@ public class EditAccountActivity extends AppCompatActivity {
     private void chooseGooglePicture(){
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
     public static final int PICK_IMAGE = 1;
