@@ -1,10 +1,12 @@
 package com.example.jonnel.parkhere;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,14 +27,17 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView state;
     private TextView city;
     private TextView zip;
+    private ImageView profilePicture;
     private DatabaseReference dref;
     private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);;
         edit = (Button)findViewById(R.id.editProf);
+        profilePicture=findViewById(R.id.profPic);
         fName = findViewById(R.id.profName);
         lName = findViewById(R.id.profLastName);
         addRESS=findViewById(R.id.profAddress);
@@ -41,8 +46,9 @@ public class ProfileActivity extends AppCompatActivity {
         zip=findViewById(R.id.profZip);
         ChangeAccountInformation=findViewById(R.id.changeAccountInformation);
         user= FirebaseAuth.getInstance().getCurrentUser();
-
         uid=user.getUid();
+
+
 
         dref=dataRef.child("User Id: " + uid).child("User Information");
         dref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -54,6 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
                 state.setText(String.format("%s %s", "State: ", dataSnapshot.child("State").getValue()));
                 city.setText(String.format("%s %s", "City: ", dataSnapshot.child("City").getValue()));
                 zip.setText(String.format("%s %s", "Zip: ", dataSnapshot.child("Zip").getValue()));
+                profilePicture.setImageURI(Uri.parse(dataSnapshot.child("photoURI").getValue().toString()));
+
             }
 
             @Override
@@ -83,12 +91,12 @@ public class ProfileActivity extends AppCompatActivity {
     private void editProfileNow(){
 
         Intent editProfIntent = new Intent(this,EditProfileActivity.class );
-        finish();
         startActivity(editProfIntent);
+        finish();
     }
     private void editAccountInfoNow(){
         Intent editAccountIntent= new Intent(this, EditAccountActivity.class);
-        finish();
         startActivity(editAccountIntent);
+        finish();
     }
 }

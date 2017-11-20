@@ -7,7 +7,7 @@
     tools:context="com.example.jonnel.parkhere.ProfileActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profPic"
         android:layout_width="107dp"
         android:layout_height="136dp"
         android:layout_marginEnd="243dp"
@@ -29,7 +29,7 @@
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/profLastName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/profPic"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/profAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/profPic" />
 
     <TextView
         android:id="@+id/profAddress"
@@ -54,7 +54,7 @@
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/profCity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/profPic" />
 
     <TextView
         android:id="@+id/profState"
@@ -64,7 +64,7 @@
         android:layout_marginTop="18dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profPic" />
 
     <TextView
         android:id="@+id/profCity"
@@ -88,7 +88,7 @@
         android:text="EditProfile"
         app:layout_constraintBottom_toTopOf="@+id/profName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/profPic"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -114,7 +114,7 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="7dp"
         android:text="Profile"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/profPic"
         app:layout_constraintEnd_toStartOf="@+id/editProf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
