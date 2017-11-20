@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -38,6 +39,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +164,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
      * errors are presented and no actual login attempt is made.
      */
     private void attemptRegister() {
+        final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+        final Intent userAdd= new Intent(this, UserInfoActivity.class);
         if (mAuthTask != null) {
             return;
         }
@@ -167,15 +173,20 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mFirstView.setError(null);
+        mLastView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String firstName = mFirstView.getText().toString();
-        String lastName = mLastView.getText().toString();
+        final String firstName = mFirstView.getText().toString();
+        final String lastName = mLastView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
@@ -220,12 +231,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                userAdd.putExtra("firstname", firstName);
+                                userAdd.putExtra("lastname", lastName);
                                 Context context = getApplicationContext();
                                 CharSequence failure = "Success.";
                                 int duration = Toast.LENGTH_SHORT;
-
                                 Toast.makeText(context, failure, duration).show();
+                                startActivity(userAdd);
 
                             } else {
                                 // If sign in fails, display a message to the user.

@@ -147,7 +147,6 @@ public class createListing_Activity extends AppCompatActivity {
 
                 DatabaseReference userRef = dataRef.child("User Id: " + uid);
                 DatabaseReference listingRef = userRef.push();
-
                 listingRef.setValue(spot);
                 key = listingRef.getKey();
 

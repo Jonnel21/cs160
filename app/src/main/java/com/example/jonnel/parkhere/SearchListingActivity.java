@@ -84,7 +84,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.availablity == true && !spot.owner.equals(uid)) {
+                if(spot.owner !=null && spot.availablity == true && !spot.owner.equals(uid)) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }

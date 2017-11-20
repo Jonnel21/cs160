@@ -81,8 +81,10 @@ public class DeleteActivity extends AppCompatActivity {
         final Iterable<DataSnapshot> listings = userId.getChildren();
         for (DataSnapshot ds : listings) {
             PSpot spot = ds.getValue(PSpot.class);
-            array.add(spot.toString());
-            deletion.add(ds);
+            if(spot.owner != null) {
+                array.add(spot.toString());
+                deletion.add(ds);
+            }
         }
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
         mListView.setAdapter(adapter);

@@ -71,7 +71,8 @@
         <activity android:name=".EndDate" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".uniqueIDActivity" />
-        <activity android:name=".SearchListingActivity"></activity>
+        <activity android:name=".SearchListingActivity" />
+        <activity android:name=".UserInfoActivity"></activity>
     </application>
 
 </manifest>

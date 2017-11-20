@@ -32,7 +32,7 @@ public class UserActivity extends AppCompatActivity {
         deleteListing = (Button) findViewById(R.id.deleteButton);
         signOutButton = (Button) findViewById(R.id.signoutButton);
         createListing = (Button) findViewById(R.id.createButton);
-        // profileButton = (Button) findViewById(R.id.profileButton);
+        profileButton = (Button) findViewById(R.id.profile);
         helloUserText = (TextView) findViewById(R.id.emailText);
         searchListing = findViewById(R.id.searchButton);
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -79,6 +79,12 @@ public class UserActivity extends AppCompatActivity {
                 startSearchListing();
             }
         });
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile();
+            }
+        });
     }
 
     private void deleteListingNow()
@@ -88,14 +94,12 @@ public class UserActivity extends AppCompatActivity {
 
     }
 
-
-    /* profile will be added later
         private void profile()
         {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
-    */
+
     private void startCreateListing()
     {
         Intent intent = new Intent(this, TimeActivity.class);
