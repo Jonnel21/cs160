@@ -12,8 +12,7 @@ public class Vehicle
     private String manf;
     private String plateNum;
 
-    public Vehicle(String make, String model, String color, String manf, String plateNum)
-    {
+    public Vehicle(String make, String model, String color, String manf, String plateNum) {
         this.make = make;
         this.model = model;
         this.color = color;

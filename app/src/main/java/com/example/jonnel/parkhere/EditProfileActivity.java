@@ -24,7 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText zipEdit;
     private Button confirmEdit;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
@@ -101,8 +101,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 uid = user.getUid();
             }
             DatabaseReference userRef = dataRef.child("User Id: " + uid).child("User Information");
-
-            //userRef.child("UserInformation");
 
             userRef.child("First name" ).setValue(firstName);
             userRef.child("Last name" ).setValue(lastName);

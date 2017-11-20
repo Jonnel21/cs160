@@ -15,50 +15,28 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-
 public class CalendarActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //instance = this;
         setContentView(R.layout.activity_calendar);
-
-
-
     }
-
     public void toSecondTimer(View view){
-        final DatePicker datePicker1 = (DatePicker) findViewById(R.id.datePicker1);
+        final DatePicker datePicker1 = findViewById(R.id.datePicker1);
         int year = datePicker1.getYear();
         int month = datePicker1.getMonth() + 1;
         int day = datePicker1.getDayOfMonth();
-
-
-
         String date = month + "/" + day + "/" + year;
 
-
         Intent cal2 = new Intent(CalendarActivity.this, EndDate.class);
-        //toEndTime.putExtra("startYear", datePicker1.getYear());
-        //toEndTime.putExtra("startMonth", datePicker1.getMonth());
-        //toEndTime.putExtra("startDay", datePicker1.getDayOfMonth());
-        //toEndTime.putExtra("hour",getIntent().getStringExtra("startHour"));
-        //toEndTime.putExtra("minute",getIntent().getStringExtra("startMinute"));
-        //Bundle dateBundle1 = getIntent().getExtras();
 
-
-        String startTime="";
-        String endTime="";
+        String startTime = "";
+        String endTime = "";
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null) {
             startTime = bundle.getString("startTime");
             endTime = bundle.getString("endTime");
         }
-
 
         if(isValidStartDate(date)){
         cal2.putExtra("startTime",startTime);

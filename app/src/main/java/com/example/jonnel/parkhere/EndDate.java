@@ -15,41 +15,24 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-
-
 public class EndDate extends AppCompatActivity {
-    //public static EndDate instance = null;
     final Context MyContext = this;
-    private Button next;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_date);
     }
 
-    public void toSecondTimer(View view) {
+    public void toSecondTimer(View view){
         final DatePicker datePicker1 = (DatePicker) findViewById(R.id.datePicker1);
         int year = datePicker1.getYear();
         int month = datePicker1.getMonth() + 1;
         int day = datePicker1.getDayOfMonth();
-        next = findViewById(R.id.toTime2Button);
-        // String myTime = getIntent().getExtras().getString("time");
-
+        Button next = findViewById(R.id.toTime2Button);
         String date = month + "/" + day + "/" + year;
 
-
         Intent cal2 = new Intent(this, createListing_Activity.class);
-        //toEndTime.putExtra("startYear", datePicker1.getYear());
-        //toEndTime.putExtra("startMonth", datePicker1.getMonth());
-        //toEndTime.putExtra("startDay", datePicker1.getDayOfMonth());
-        //toEndTime.putExtra("hour",getIntent().getStringExtra("startHour"));
-        //toEndTime.putExtra("minute",getIntent().getStringExtra("startMinute"));
-        //Bundle dateBundle1 = getIntent().getExtras();
-
         String startTime = "";
         String endTime = "";
         String startDate = "";
@@ -68,11 +51,8 @@ public class EndDate extends AppCompatActivity {
 
             }
             else {
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_LONG;
                 CharSequence message = "Please pick a valid date";
                 Toast.makeText(MyContext, message, Toast.LENGTH_SHORT).show();
-               // next.setEnabled(false);
             }
 
         }
@@ -80,11 +60,7 @@ public class EndDate extends AppCompatActivity {
 
     }
 
-
-
-
-
-    public boolean isValidEndDate(String input) {
+    public boolean isValidEndDate(String input){
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
         dateFormat.setLenient(false);
         try {
@@ -95,7 +71,7 @@ public class EndDate extends AppCompatActivity {
         return true;
     }
 
-    public boolean validEnd(String date1, String date2) {
+    public boolean validEnd(String date1, String date2){
         String[] bDate = date1.split("/");
         String mon1 = bDate[0];
         String day1 = bDate[1];

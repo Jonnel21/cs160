@@ -6,16 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class OtherUserProfileActivity extends AppCompatActivity {
+public class OtherUserProfileActivity extends AppCompatActivity{
     private TextView fName;
     private TextView lName;
     private TextView address;
@@ -28,7 +27,7 @@ public class OtherUserProfileActivity extends AppCompatActivity {
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_user_profile);
         otherUserId = getIntent().getStringExtra("id");
@@ -42,12 +41,15 @@ public class OtherUserProfileActivity extends AppCompatActivity {
         city = findViewById(R.id.profCity);
         zip = findViewById(R.id.profZip);
 
-        review.setOnClickListener(new View.OnClickListener() {
+        review.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 String str = reviewText.getText().toString();
-                dataRef.child("User Id: " + otherUserId).child("User Information").child("Reviews").setValue(str);
+                // TODO: User should be limited to one review per user to avoid spam from other users. need to fix.
+                dataRef.child("User Id: " + otherUserId).child("User Information").child("Ratings").child("Reviews").push().setValue(str);
                 reviewText.setText(" ");
+                CharSequence thanks = "Thank you! Your review has been submitted!";
+                Toast.makeText(getApplicationContext(), thanks, Toast.LENGTH_LONG).show();
             }
         });
 
