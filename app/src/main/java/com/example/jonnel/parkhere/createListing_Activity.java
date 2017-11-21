@@ -25,52 +25,39 @@ public class createListing_Activity extends AppCompatActivity {
     Button createListing;
     EditText address_text;
     EditText price_text;
-    PSpot spot;
     String address;
     double price;
-    private TextView startTime;
-    private TextView endTime;
-    private TextView startDate;
-    private TextView endDate;
     private static String key = " ";
-    private Bundle pastInstance;
     private String sTime;
     private String eTime;
     private String sDate;
     private String eDate;
 
 
-    private void menu()
-    {
-        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
-    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.activity_create_listing_);
 
-        pastInstance=getIntent().getExtras();
-        if(pastInstance!=null) {
-            startTime = (TextView) findViewById(R.id.startTime);
+        Bundle pastInstance = getIntent().getExtras();
+        if(pastInstance !=null) {
+            TextView startTime = (TextView) findViewById(R.id.startTime);
             startTime.setText(pastInstance.getString("startTime"));
-            sTime=pastInstance.getString("startTime");
+            sTime= pastInstance.getString("startTime");
 
-            endTime = (TextView) findViewById(R.id.endTime);
+            TextView endTime = (TextView) findViewById(R.id.endTime);
             endTime.setText(pastInstance.getString("endTime"));
-            eTime=pastInstance.getString("endTime");
+            eTime= pastInstance.getString("endTime");
 
-            startDate = (TextView) findViewById(R.id.startDate);
+            TextView startDate = (TextView) findViewById(R.id.startDate);
             startDate.setText(pastInstance.getString("beginDate"));
-            sDate=pastInstance.getString("beginDate");
+            sDate= pastInstance.getString("beginDate");
 
-            endDate = (TextView) findViewById(R.id.endDate);
+            TextView endDate = (TextView) findViewById(R.id.endDate);
             endDate.setText(pastInstance.getString("endDate"));
-            eDate=pastInstance.getString("endDate");
+            eDate= pastInstance.getString("endDate");
         }
         createListing = findViewById(R.id.submit);
         address_text = findViewById(R.id.address);
@@ -79,17 +66,11 @@ public class createListing_Activity extends AppCompatActivity {
         String add = address_text.getText().toString();
         String pri = price_text.getText().toString();
 
-
-        View focusView = null;
-
-        //createListing.setEnabled(false);
-
         if ( add.trim().equals("") || pri.trim().equals("")){
             price_text.setError(getString(R.string.error_field_required));
             address_text.setError(getString(R.string.error_field_required));
         }
-        if(!add.trim().equals("") && !pri.trim().equals(""))
-        {
+        if(!add.trim().equals("") && !pri.trim().equals("")){
             price_text.setError(null);
             address_text.setError(null);
             //createListing.setEnabled(true);
@@ -161,20 +142,16 @@ public class createListing_Activity extends AppCompatActivity {
 
 
     }
-
     public static String getKey()
     {
         return key;
     }
-    public boolean validPrice(double price)
-    {
-        if(price <= 0)
-        {
+    public boolean validPrice(double price){
+        if(price <= 0){
             return false;
         }
         return true;
     }
-
     public boolean validAddress(String add){
         if(add.length() > 6 && !add.isEmpty()){
             return true;
@@ -182,12 +159,16 @@ public class createListing_Activity extends AppCompatActivity {
         return false;
 
     }
-    public boolean PriceBound(double price)
-    {
-        if( price > 10000 )
-        {
+    public boolean PriceBound(double price) {
+        if( price > 10000 ) {
          return false;
         }
         return true;
+    }
+    private void menu(){
+        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 }

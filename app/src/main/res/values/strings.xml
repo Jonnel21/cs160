@@ -27,4 +27,5 @@
     <string name="address_label">Address</string>
     <string name="Create_Listing_Submit">Create Parking Spot</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_other_user">OtherUserActivity</string>
 </resources>

@@ -29,34 +29,29 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class DeleteActivity extends AppCompatActivity {
+public class DeleteActivity extends AppCompatActivity{
     ListView mListView;
     FirebaseUser user;
     String uid;
     String key;
-    //String s;
     ArrayList<String> array;
-    final ArrayList<String> keyList = new ArrayList<>();
-    final ArrayList<String> items = new ArrayList<>();
     DatabaseReference myRef;
 
-    private static final String TAG = "DeleteActivity";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete);
 
         myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.deleteList);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user!=null) {
             uid = user.getUid();
         }
         array = new ArrayList<>();
 
         key = createListing_Activity.getKey();
-        System.out.println("SearchListingClass: " + key);
-        System.out.println("User Id: " + uid);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

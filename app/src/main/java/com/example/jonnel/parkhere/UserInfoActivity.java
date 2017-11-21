@@ -26,8 +26,6 @@ public class UserInfoActivity extends AppCompatActivity {
     private AutoCompleteTextView CityView;
     private AutoCompleteTextView StateView;
     private AutoCompleteTextView ZipView;
-    private FirebaseAuth mAuth;
-    Button finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +97,6 @@ public class UserInfoActivity extends AppCompatActivity {
             uid = user.getUid();
         }
             DatabaseReference userRef = dataRef.child("User Id: " + uid).child("User Information");
-
-            //userRef.child("UserInformation");
 
             userRef.child("First name" ).setValue(first);
             userRef.child("Last name" ).setValue(last);

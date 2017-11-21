@@ -1,13 +1,6 @@
 package com.example.jonnel.parkhere;
 
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.provider.ContactsContract;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,10 +43,6 @@ public class SearchListingActivity extends AppCompatActivity {
         lKeys = new ArrayList<>();
         key = createListing_Activity.getKey(); // gets the listing hash key
 
-        key = createListing_Activity.getKey();
-        System.out.println("SearchListingClass: " + key);
-        System.out.println("User Id: " + uid);
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,7 +62,6 @@ public class SearchListingActivity extends AppCompatActivity {
         final ArrayList<DataSnapshot> bookings = new ArrayList();
         // Store users key in array list
         for(DataSnapshot d: dataSnapshot.getChildren()) {
-            //PSpot spot = d.getValue(PSpot.class);
             mUsers.add(String.valueOf(d.getKey()));
         }
         int i = 0;
@@ -84,7 +72,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.owner !=null && spot.availablity == true && !spot.owner.equals(uid)) {
+                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid)) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }
@@ -98,22 +86,37 @@ public class SearchListingActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                String ownerId = getOwnerParser(array.get(i));
+                Intent otherUser = new Intent(getApplicationContext(), OtherUserProfileActivity.class);
+                otherUser.putExtra("id", ownerId);
+                startActivityForResult(otherUser, 0);
+                // TODO: Booking commented out for testing review purpose, need to reimplement booking.
+                /*AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
                 adb.setTitle("Book Parking Spot?");
                 adb.setMessage("Are you sure you want to book this parking spot");
                 final DataSnapshot update = bookings.get(i);
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        update.child("availablity").getRef().setValue(false);
+                        update.child("availability").getRef().setValue(false);
                         update.child("reserve").getRef().setValue(uid);
 
                         adapter.notifyDataSetChanged();
-
-                    }});
-                adb.show();
+                    }});*/
+                //adb.show();
             }
         });
+    }
+
+    /**
+     * helper method to parse string of owner to
+     * retrieve id of other users
+     * @param str
+     * @return
+     */
+    private String getOwnerParser(String str){
+        int indexOfColon = str.indexOf(":");
+        return str.substring(indexOfColon + 1 , 47); // TODO: hard coded end index. need to fix.
     }
 
 }

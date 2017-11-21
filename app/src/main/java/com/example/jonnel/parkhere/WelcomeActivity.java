@@ -23,22 +23,17 @@ public class WelcomeActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            register();
+                register();
             }
         });
     }
 
-    /**
-     *
-     */
-    private void login()
-    {
+    private void login() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
-    private void register()
-    {
+    private void register() {
         Intent intent = new Intent( this, RegisterActivity.class);
         startActivity(intent);
     }

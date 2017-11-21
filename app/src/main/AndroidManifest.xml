@@ -58,9 +58,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
         <activity android:name=".UserActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
@@ -73,11 +70,11 @@
         <activity android:name=".EndTime" />
         <activity android:name=".EndDate" />
         <activity android:name=".DeleteActivity" />
-        <activity android:name=".uniqueIDActivity" />
         <activity android:name=".SearchListingActivity" />
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".EditProfileActivity" />
-        <activity android:name=".EditAccountActivity"></activity>
+        <activity android:name=".EditAccountActivity" />
+        <activity android:name=".OtherUserProfileActivity"></activity>
     </application>
 
 </manifest>
