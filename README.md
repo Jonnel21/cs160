@@ -22,3 +22,4 @@ android emulator, such as Nox (https://www.bignox.com/),
 enable root mode and drag and drop the apk into the emulator 
 after launch and it should prompt you to install.
 After installation launch the android application.
+update:debug apk will only be provided to users who ask.
