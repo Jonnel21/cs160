@@ -74,7 +74,8 @@
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".EditAccountActivity" />
-        <activity android:name=".OtherUserProfileActivity"></activity>
+        <activity android:name=".OtherUserProfileActivity" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>

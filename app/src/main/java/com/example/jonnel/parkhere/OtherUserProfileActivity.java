@@ -1,5 +1,6 @@
 package com.example.jonnel.parkhere;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class OtherUserProfileActivity extends AppCompatActivity{
     private TextView fName;
     private TextView lName;
@@ -28,6 +31,8 @@ public class OtherUserProfileActivity extends AppCompatActivity{
     private String uid;
     private EditText reviewText;
     private String otherUserId;
+    private static String keyString = " ";
+    private ArrayList<String> reviewKeys = new ArrayList<>();
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -36,8 +41,8 @@ public class OtherUserProfileActivity extends AppCompatActivity{
         setContentView(R.layout.activity_other_user_profile);
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        otherUserId = getIntent().getStringExtra("id");
 
+        otherUserId = getIntent().getStringExtra("id");
         reviewText = findViewById(R.id.ReviewText);
         review = findViewById(R.id.submitReview);
         fName = findViewById(R.id.profName);
@@ -52,11 +57,19 @@ public class OtherUserProfileActivity extends AppCompatActivity{
             public void onClick(View view) {
                 String str = reviewText.getText().toString();
                 // TODO: User should be limited to one review per user to avoid spam from other users. need to fix.
-                dataRef.child("User Id: " + otherUserId).child("User Information").child("Ratings").child("Reviews").push().setValue(str);
+                DatabaseReference key = dataRef.child("User Id: " + otherUserId).child("User Information").child("Ratings").child("Reviews").push();
+                key.setValue(str);
+                reviewKeys.add(key.getKey());
+                System.out.println(reviewKeys.toString());
+                keyString = key.getKey();
+
+                System.out.println("This key was pushed to Database: " + key.getKey());
                 System.out.println("User " + uid + " has reviewed user " + otherUserId);
                 reviewText.setText(" ");
                 CharSequence thanks = "Thank you! Your review has been submitted!";
                 Toast.makeText(getApplicationContext(), thanks, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -78,5 +91,10 @@ public class OtherUserProfileActivity extends AppCompatActivity{
             }
         });
     }
+
+    public String getKeys(){
+        return keyString;
+    }
+
 
 }

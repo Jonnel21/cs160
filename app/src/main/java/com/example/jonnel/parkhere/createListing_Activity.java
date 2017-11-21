@@ -142,8 +142,7 @@ public class createListing_Activity extends AppCompatActivity {
 
 
     }
-    public static String getKey()
-    {
+    public static String getKey(){
         return key;
     }
     public boolean validPrice(double price){

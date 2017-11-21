@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView city;
     private TextView zip;
     private ImageView profilePicture;
+    private Button review;
     private DatabaseReference dref;
     private String uid;
     FirebaseStorage picture;
@@ -46,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        review = findViewById(R.id.MyReview);
         profilePicture=findViewById(R.id.profPic);
         edit = findViewById(R.id.editProf);
         fName = findViewById(R.id.profName);
@@ -107,6 +109,13 @@ public class ProfileActivity extends AppCompatActivity {
                 editProfileNow();
             }
         });
+
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMyReview();
+            }
+        });
     }
     private void editProfileNow(){
 
@@ -119,4 +128,11 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(editAccountIntent);
         finish();
     }
+
+    private void startMyReview(){
+        Intent intent = new Intent(this, ReviewActivity.class);
+        startActivity(intent);
+    }
+
+
 }
