@@ -1,5 +1,7 @@
 package com.example.jonnel.parkhere;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,7 +45,19 @@ public class SearchListingActivity extends AppCompatActivity {
         lKeys = new ArrayList<>();
         key = createListing_Activity.getKey(); // gets the listing hash key
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        /*myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 showData(dataSnapshot); // helper method to iterate thorough user's children
@@ -53,7 +67,7 @@ public class SearchListingActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
     }
 
@@ -72,7 +86,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid)) {
+                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid) && spot.address != null) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }
@@ -86,24 +100,40 @@ public class SearchListingActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                String ownerId = getOwnerParser(array.get(i));
-                Intent otherUser = new Intent(getApplicationContext(), OtherUserProfileActivity.class);
-                otherUser.putExtra("id", ownerId);
-                startActivityForResult(otherUser, 0);
-                // TODO: Booking commented out for testing review purpose, need to reimplement booking.
-                /*AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
-                adb.setTitle("Book Parking Spot?");
-                adb.setMessage("Are you sure you want to book this parking spot");
-                final DataSnapshot update = bookings.get(i);
-                adb.setNegativeButton("Cancel", null);
-                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        update.child("availability").getRef().setValue(false);
-                        update.child("reserve").getRef().setValue(uid);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchListingActivity.this);
+                builder.setMessage("Would you like to Book now? or Visit User Profile")
+                        .setCancelable(false)
+                        .setPositiveButton("Book now", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int j) {
+                                AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                                adb.setTitle("Book Parking Spot?");
+                                adb.setMessage("Are you sure you want to book this parking spot");
+                                final DataSnapshot update = bookings.get(i);
+                                adb.setNegativeButton("Cancel", null);
+                                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        update.child("availability").getRef().setValue(false);
+                                        update.child("reserve").getRef().setValue(uid);
 
-                        adapter.notifyDataSetChanged();
-                    }});*/
-                //adb.show();
+                                        adapter.notifyDataSetChanged();
+                                    }});
+                                adb.show();
+                            }
+
+                        })
+
+                        .setNegativeButton("Go to User Profile", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int j) {
+                                String ownerId = getOwnerParser(array.get(i));
+                                Intent otherUser = new Intent(getApplicationContext(), OtherUserProfileActivity.class);
+                                otherUser.putExtra("id", ownerId);
+                                startActivityForResult(otherUser, 0);
+                            }
+                        });
+                builder.show();
+
             }
         });
     }
