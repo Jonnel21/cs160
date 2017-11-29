@@ -76,7 +76,7 @@ public class DeleteActivity extends AppCompatActivity{
         final Iterable<DataSnapshot> listings = userId.getChildren();
         for (DataSnapshot ds : listings) {
             PSpot spot = ds.getValue(PSpot.class);
-            if(spot.owner != null) {
+            if(spot.owner != null && spot.address != null) {
                 array.add(spot.toString());
                 deletion.add(ds);
             }

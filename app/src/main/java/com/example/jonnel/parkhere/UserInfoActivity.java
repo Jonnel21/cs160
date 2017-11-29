@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class UserInfoActivity extends AppCompatActivity {
@@ -33,9 +38,19 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
       AddressView = (AutoCompleteTextView) findViewById(R.id.address);
         CityView = (AutoCompleteTextView) findViewById(R.id.city);
-        StateView = (AutoCompleteTextView) findViewById(R.id.state);
+        //StateView = (AutoCompleteTextView) findViewById(R.id.state);
         ZipView= (AutoCompleteTextView) findViewById(R.id.zip);
         Button finished = (Button) findViewById(R.id.finish);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        String[] state = {"AK",  "AL", "AR", "AZ", "CA", "CO", "CT" ,"DE" ,"FL" ,"GA" ,"HI" ,"IA" ,"ID" ,"IL" ,"IN" ,"KS" ,"KY" ,"LA" ,"MA" ,"MD" ,"ME" ,"MI" ,"MN",
+                "MO" ,"MS" ,"MT" ,"NC" ,"ND" ,"NE" ,"NH" ,"NJ" ,"NM", "NV" ,"NY" ,"OH" ,"OK" ,"OR" ,"PA" ,"RI" ,"SC" ,"SD" ,"TN" ,"TX" ,"UT" ,"VA" ,
+                "VT" ,"WA" ,"WI" ,"WV" ,"WY"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(UserInfoActivity.this,android.R.layout.simple_spinner_item, state);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
         finished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,8 +72,13 @@ public class UserInfoActivity extends AppCompatActivity {
 
         final String address = AddressView.getText().toString();
         final String city = CityView.getText().toString();
-        final String state = StateView.getText().toString();
+        //final String state = StateView.getText().toString();
         final String zip= ZipView.getText().toString();
+
+        Spinner mySpinner=(Spinner) findViewById(R.id.spinner);
+        final String state = mySpinner.getSelectedItem().toString();
+
+
 
         boolean cancel = false;
         View focusView = null;
@@ -76,14 +96,15 @@ public class UserInfoActivity extends AppCompatActivity {
             focusView = CityView;
             cancel = true;
         }
+        /*
         if(TextUtils.isEmpty(state)){
           StateView.setError(getString(R.string.error_field_required));
             focusView = StateView;
             cancel = true;
         }
-
-        if(TextUtils.isEmpty(zip)){
-           ZipView.setError(getString(R.string.error_field_required));
+        */
+        if(TextUtils.isEmpty(zip) || zipTest(zip) == false){
+            ZipView.setError(getString(R.string.error_field_required));
             focusView = ZipView;
             cancel = true;
         }
@@ -115,6 +136,14 @@ public class UserInfoActivity extends AppCompatActivity {
             finish();
 
        }
+    }
+    private boolean zipTest(String zip)
+    {
+        boolean ziptest = false;
+        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(zip);
+        return matcher.matches();
     }
 
 }
