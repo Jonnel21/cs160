@@ -62,8 +62,10 @@ public class SearchListingActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 showData(dataSnapshot); // helper method to iterate thorough user's children
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
         });*/
 
