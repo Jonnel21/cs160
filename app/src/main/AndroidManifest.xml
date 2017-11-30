@@ -75,7 +75,11 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".EditAccountActivity" />
         <activity android:name=".OtherUserProfileActivity" />
-        <activity android:name=".ReviewActivity"></activity>
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".chooseSpot" />
+        <activity android:name=".EditParkingSpot" />
+        <activity android:name=".ReuseParkingSpot" />
+        <activity android:name=".changeSpotInformation"></activity>
     </application>
 
 </manifest>

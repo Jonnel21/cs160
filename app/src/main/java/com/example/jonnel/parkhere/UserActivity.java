@@ -88,7 +88,7 @@ public class UserActivity extends AppCompatActivity {
 
     private void startCreateListing()
     {
-        Intent intent = new Intent(this, TimeActivity.class);
+        Intent intent = new Intent(this, chooseSpot.class);
         startActivity(intent);
     }
 
