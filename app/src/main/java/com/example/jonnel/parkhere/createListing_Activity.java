@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
@@ -20,19 +22,22 @@ import java.util.Map;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class createListing_Activity extends AppCompatActivity {
     Button createListing;
     EditText address_text;
     EditText price_text;
     String address;
+    String zip;
     double price;
     private static String key = " ";
     private String sTime;
     private String eTime;
     private String sDate;
     private String eDate;
-
+    private AutoCompleteTextView ZipView;
 
 
     @Override
@@ -62,9 +67,21 @@ public class createListing_Activity extends AppCompatActivity {
         createListing = findViewById(R.id.submit);
         address_text = findViewById(R.id.address);
         price_text = findViewById(R.id.price);
-
+        ZipView= (AutoCompleteTextView) findViewById(R.id.zip);
         String add = address_text.getText().toString();
         String pri = price_text.getText().toString();
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        String[] state = {"AK",  "AL", "AR", "AZ", "CA", "CO", "CT" ,"DE" ,"FL" ,"GA" ,"HI" ,"IA" ,"ID" ,"IL" ,"IN" ,"KS" ,"KY" ,"LA" ,"MA" ,"MD" ,"ME" ,"MI" ,"MN",
+                "MO" ,"MS" ,"MT" ,"NC" ,"ND" ,"NE" ,"NH" ,"NJ" ,"NM", "NV" ,"NY" ,"OH" ,"OK" ,"OR" ,"PA" ,"RI" ,"SC" ,"SD" ,"TN" ,"TX" ,"UT" ,"VA" ,
+                "VT" ,"WA" ,"WI" ,"WV" ,"WY"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(createListing_Activity.this,android.R.layout.simple_spinner_item, state);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        zip= ZipView.getText().toString();
+        Spinner mySpinner=(Spinner) findViewById(R.id.spinner);
+        final String stateInput = mySpinner.getSelectedItem().toString();
+
 
         if ( add.trim().equals("") || pri.trim().equals("")){
             price_text.setError(getString(R.string.error_field_required));
@@ -74,6 +91,13 @@ public class createListing_Activity extends AppCompatActivity {
             price_text.setError(null);
             address_text.setError(null);
             //createListing.setEnabled(true);
+        }
+        if(TextUtils.isEmpty(zip) || zipTest(zip) == false){
+            ZipView.setError(getString(R.string.error_field_required));
+        }
+        if(!TextUtils.isEmpty(zip) || !zipTest(zip) == false){
+
+            ZipView.setError(null);
         }
         createListing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +117,7 @@ public class createListing_Activity extends AppCompatActivity {
                     price = 0;
                 }
 
-
+                zip = ZipView.getText().toString();
                 address = address_text.getText().toString();
 
 
@@ -104,7 +128,7 @@ public class createListing_Activity extends AppCompatActivity {
 
 
 
-                PSpot spot = new PSpot(price, address, sDate, eDate, sTime, eTime, true, uid, null);
+                PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null);
 
                // if (address_text != null && price_text != null) {
                 if(validPrice(price) && validAddress(address) && PriceBound(price)){
@@ -169,5 +193,13 @@ public class createListing_Activity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
         startActivity(intent);
+    }
+    private boolean zipTest(String zip)
+    {
+        boolean ziptest = false;
+        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(zip);
+        return matcher.matches();
     }
 }

@@ -18,6 +18,8 @@ public class PSpot {
     public Boolean availability = true;
     public String owner;
     public String reserve;
+    public String zip;
+    public String state;
 
 
     // creates empty parking spot
@@ -30,13 +32,17 @@ public class PSpot {
         endTime = null;
         owner = "";
         reserve = null;
+        zip = null;
+        state = null;
     }
 
     // creates parking spot based on the parameters
-    public PSpot(double price, String address, String startDate, String endDate, String startTime,
+    public PSpot(double price, String address,String state, String zip,  String startDate, String endDate, String startTime,
                  String endTime, Boolean availability,String owner, String reserve) {
         this.price = price;
         this.address = address;
+        this.state = state;
+        this.zip = zip;
         this.startDate = startDate;
         this.endDate=endDate;
         this.startTime = startTime;
@@ -84,7 +90,7 @@ public class PSpot {
 
     public String toString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        return "Parking Spot"+ "\n" + "Address: " +  getAddress() +  "\n" + "Cost: " + formatter.format(getPrice()) + "\n" + "Start Date: " + getstartDate() + "\n" + "End Date: " + getendDate() + "\n"+ "Starting at: " + getStartTime() +"\n" + "Ending at: " + getEndTime()+ "Available: "+ availability;
+        return "Parking Spot"+ "\n" + "Address: " +  getAddress() +   "\n" + "Cost: " + formatter.format(getPrice()) + "\n" + "Start Date: " + getstartDate() + "\n" + "End Date: " + getendDate() + "\n"+ "Starting at: " + getStartTime() +"\n" + "Ending at: " + getEndTime()+ "Available: "+ availability;
     }
     public String ownerToString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();

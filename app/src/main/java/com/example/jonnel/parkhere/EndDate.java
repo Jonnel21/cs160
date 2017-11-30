@@ -42,13 +42,12 @@ public class EndDate extends AppCompatActivity {
             endTime = bundle.getString("endTime");
             startDate = bundle.getString("beginDate");
 
-            if (validEnd(startDate, date) && isValidEndDate(date) && startDate != null && date != null) {
+            if (validEnd(startDate, date) && isValidEndDate(date)){
                 cal2.putExtra("startTime", startTime);
                 cal2.putExtra("endTime", endTime);
                 cal2.putExtra("beginDate", startDate);
                 cal2.putExtra("endDate", date);
                 startActivity(cal2);
-
             }
             else {
                 CharSequence message = "Please pick a valid date";
@@ -56,7 +55,7 @@ public class EndDate extends AppCompatActivity {
             }
 
         }
-        startActivity(cal2);
+        //startActivity(cal2);
 
     }
 
@@ -82,15 +81,16 @@ public class EndDate extends AppCompatActivity {
         String year2 = eDate[2];
 
 
-        if(Integer.parseInt(mon1) <= Integer.parseInt(mon2) && Integer.parseInt(year1) <= Integer.parseInt(year2)&& Integer.parseInt(day1) <= Integer.parseInt(day2))
-        {
+        if(Integer.parseInt(mon1) == Integer.parseInt(mon2) && Integer.parseInt(year1) <= Integer.parseInt(year2)&& Integer.parseInt(day1) < (Integer.parseInt(day2))) {
+            return true;
+        }
+        else if(Integer.parseInt(mon1) < Integer.parseInt(mon2) && Integer.parseInt(year1) <= Integer.parseInt(year2)) {
             return true;
         }
         else if(Integer.parseInt(year2) > Integer.parseInt(year1))
         {
             return true;
         }
-
 
         return false;
 

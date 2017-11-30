@@ -36,7 +36,7 @@ public class UserInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-      AddressView = (AutoCompleteTextView) findViewById(R.id.address);
+         AddressView = (AutoCompleteTextView) findViewById(R.id.address);
         CityView = (AutoCompleteTextView) findViewById(R.id.city);
         //StateView = (AutoCompleteTextView) findViewById(R.id.state);
         ZipView= (AutoCompleteTextView) findViewById(R.id.zip);
