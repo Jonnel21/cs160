@@ -1,6 +1,7 @@
 package com.example.jonnel.parkhere;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,21 +24,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SearchListingActivity extends AppCompatActivity {
+public class SearchZipActivity extends AppCompatActivity {
     ListView mListView;
     FirebaseUser user;
     String uid;
     String key;
+    private String ziptosearch;
+
     ArrayList<String> array;
     ArrayList<String> mUsers;
     ArrayList<String> lKeys;
+    private Button zip;
+    private EditText zipsearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_listing);
-
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        setContentView(R.layout.activity_search_zip);
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        //final DataSnapshot dataSnapshot;
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user!=null) {
@@ -44,12 +52,59 @@ public class SearchListingActivity extends AppCompatActivity {
         mUsers = new ArrayList<>();
         lKeys = new ArrayList<>();
         key = createListing_Activity.getKey(); // gets the listing hash key
+        zip= findViewById(R.id.zipbutton);
+        zipsearch = findViewById(R.id.zip1);
+        ziptosearch = zipsearch.getText().toString();
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+/*
+       zip.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                ziptosearch = zipsearch.getText().toString();
+                Context context = getApplicationContext();
+                CharSequence message = ziptosearch + "FUCK 160";
+                int duration = Toast.LENGTH_LONG;
+                Toast.makeText(context, message, duration).show();
+            }
+        });
+
+*/
+
+
+
+
+
+
+      zip.setOnClickListener(new View.OnClickListener() {
+        @Override
+       public void onClick(View view) {
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        array.clear();
+                        showData(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+       });
+
+
+
+
+
+
+/**
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                array.clear();
                 showData(dataSnapshot);
+
             }
 
             @Override
@@ -57,23 +112,12 @@ public class SearchListingActivity extends AppCompatActivity {
 
             }
         });
-
-        /*myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                showData(dataSnapshot); // helper method to iterate thorough user's children
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+**/
     }
 
     private void showData(final DataSnapshot dataSnapshot){
         array.clear();
+        ziptosearch = zipsearch.getText().toString();
         final ArrayList<DataSnapshot> bookings = new ArrayList();
         // Store users key in array list
         for(DataSnapshot d: dataSnapshot.getChildren()) {
@@ -87,7 +131,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid) && spot.address != null) {
+                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid) && spot.address != null && spot.zip.equals(ziptosearch)) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }
@@ -96,18 +140,18 @@ public class SearchListingActivity extends AppCompatActivity {
             i++;
         }
 
-        final   ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SearchListingActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchZipActivity.this);
                 builder.setMessage("Would you like to Book now? or Visit User Profile")
                         .setCancelable(false)
                         .setPositiveButton("Book now", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int j) {
-                                AlertDialog.Builder adb=new AlertDialog.Builder(SearchListingActivity.this);
+                                AlertDialog.Builder adb=new AlertDialog.Builder(SearchZipActivity.this);
                                 adb.setTitle("Book Parking Spot?");
                                 adb.setMessage("Are you sure you want to book this parking spot");
                                 final DataSnapshot update = bookings.get(i);
@@ -119,8 +163,8 @@ public class SearchListingActivity extends AppCompatActivity {
                                         int tocount = 0;
                                         tocount = Integer.parseInt(update.child("counter").getValue().toString());
                                         update.child("counter").getRef().setValue(tocount + 1);
-                                        adapter.notifyDataSetChanged();
 
+                                        adapter.notifyDataSetChanged();
                                     }});
                                 adb.show();
                             }

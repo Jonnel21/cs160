@@ -9,6 +9,7 @@ import java.text.NumberFormat;
 public class PSpot {
 
     public double price;
+    public int counter;
     public String status;
     public String address;
     public String startDate;
@@ -34,11 +35,12 @@ public class PSpot {
         reserve = null;
         zip = null;
         state = null;
+        counter = 0;
     }
 
     // creates parking spot based on the parameters
     public PSpot(double price, String address,String state, String zip,  String startDate, String endDate, String startTime,
-                 String endTime, Boolean availability,String owner, String reserve) {
+                 String endTime, Boolean availability,String owner, String reserve, int counter) {
         this.price = price;
         this.address = address;
         this.state = state;
@@ -50,6 +52,7 @@ public class PSpot {
         this.availability = availability;
         this.owner = owner;
         this.reserve = reserve;
+        this.counter = counter;
     }
 
     public double getPrice()
@@ -76,6 +79,10 @@ public class PSpot {
     {
         return endTime;
     }
+    public String getZip()
+    {
+        return zip;
+    }
     public String getOwner() { return owner; }
 
     public void setPrice(double price) { this.price = price; }
@@ -90,13 +97,14 @@ public class PSpot {
 
     public String toString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        return "Parking Spot"+ "\n" + "Address: " +  getAddress() +   "\n" + "Cost: " + formatter.format(getPrice()) + "\n" + "Start Date: " + getstartDate() + "\n" + "End Date: " + getendDate() + "\n"+ "Starting at: " + getStartTime() +"\n" + "Ending at: " + getEndTime()+ "Available: "+ availability;
+        return "Parking Spot"+ "\n" + "Address: " +  getAddress() +"\n" + "Zip: " + getZip()  + "\n" + "Cost: " + formatter.format(getPrice()) + "\n" + "Start Date: " + getstartDate() + "\n" + "End Date: " + getendDate() + "\n"+ "Starting at: " + getStartTime() +"\n" + "Ending at: " + getEndTime()+ "\n" + "Available: "+ availability +"\n" + "Number of times booked: " + counter;
     }
     public String ownerToString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        return "Parking Spot" + "\n"+"Owner:"+owner +"\n"+ " " + formatter.format(getPrice()) + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+ availability;
+        return "Parking Spot" + "\n"+"Owner:"+owner +"\n"+ " " +"Price: "+  formatter.format(getPrice()) + "\n" + "Address: " +  getAddress() +"\n" + "Zip: " + getZip() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+ availability + "\n" + "Number of times booked: " + counter;
     }
     public String rentToString() {
         return "Parking Spot" + "\n"+"Owner:"+owner +"\n"+"Renter: " + reserve+ "\n"+ "$" + " " + getPrice() + "\n" + "Address: " +  getAddress() + "\n" + "Start Time: "+ startTime +"\n" + "End Time: " + endTime + "\n" + "Start Date: " + startDate + "\n" + "End Date: " + endDate +"\n"+ "Available: "+ availability;
     }
+
 }

@@ -49,7 +49,7 @@ public class EndTime extends AppCompatActivity{
             time = hour + ":" + min + pm;
         }
 
-        else if( hour > 12 && hour < 23){
+        else if( hour > 12 && hour <= 23){
             hour = hour - 12;
             time = hour + ":" + min + pm;
 

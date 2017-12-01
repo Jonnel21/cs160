@@ -128,7 +128,7 @@ public class createListing_Activity extends AppCompatActivity {
 
 
 
-                PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null);
+                PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null,0);
 
                // if (address_text != null && price_text != null) {
                 if(validPrice(price) && validAddress(address) && PriceBound(price)){

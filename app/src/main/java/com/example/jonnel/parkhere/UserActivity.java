@@ -94,7 +94,7 @@ public class UserActivity extends AppCompatActivity {
 
 
     private void startSearchListing(){
-        Intent intent = new Intent(this, SearchListingActivity.class);
+        Intent intent = new Intent(this, ChooseSearchActivity.class);
         startActivity(intent);
     }
 

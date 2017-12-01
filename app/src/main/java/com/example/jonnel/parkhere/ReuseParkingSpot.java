@@ -66,7 +66,7 @@ public class ReuseParkingSpot extends AppCompatActivity {
         final Iterable<DataSnapshot> listings = userId.getChildren();
         for (DataSnapshot ds : listings) {
             PSpot spot = ds.getValue(PSpot.class);
-            if(spot.owner != null && spot.address != null) {
+            if(spot.owner != null && spot.address != null && spot.counter >= 1) {
                 array.add(spot.toString());
                 edit.add(ds);
             }
