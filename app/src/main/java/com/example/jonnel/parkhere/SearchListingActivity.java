@@ -37,9 +37,11 @@ public class SearchListingActivity extends AppCompatActivity {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user!=null) {
             uid = user.getUid();
         }
+
         array = new ArrayList<>();
         mUsers = new ArrayList<>();
         lKeys = new ArrayList<>();
@@ -58,18 +60,6 @@ public class SearchListingActivity extends AppCompatActivity {
             }
         });
 
-        /*myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                showData(dataSnapshot); // helper method to iterate thorough user's children
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
     }
 
     private void showData(final DataSnapshot dataSnapshot){
@@ -87,7 +77,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid) && spot.address != null) {
+                if(spot.owner !=null && spot.availability && !spot.owner.equals(uid) && spot.address != null) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }
@@ -146,17 +136,13 @@ public class SearchListingActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
                 String listingHash = getListingHashParser(array.get(i));
-                System.out.println(listingHash);
-                System.out.println(array.get(i));
                 String listings = bookings.get(i).getValue().toString();
-                System.out.println(listings);
+                String owner = getOwnerParser(array.get(i));
                 Intent intent = new Intent(getApplicationContext(), ListingOverviewActivity.class);
                 intent.putExtra("Booking", listings);
-                intent.putExtra("Owner", getOwnerParser(array.get(i)));
-                intent.putExtra("ListingHash", getListingHashParser(array.get(i)));
-                intent.putExtra("DataSnapshot", bookings.get(i).toString());
-                System.out.println("Printing from SearchListing: " + bookings.get(i).toString());
-
+                intent.putExtra("Owner", owner);
+                intent.putExtra("ListingHash", listingHash);
+                intent.putExtra("DataSnapshot", listings);
                 startActivity(intent);
             }
         });

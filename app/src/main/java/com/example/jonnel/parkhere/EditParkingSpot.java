@@ -61,7 +61,7 @@ public class EditParkingSpot extends AppCompatActivity {
 
     private void showData(final DataSnapshot dataSnapshot) {
         array.clear();
-        final ArrayList<DataSnapshot> edit = new ArrayList();
+        final ArrayList<DataSnapshot> edit = new ArrayList<>();
         DataSnapshot userId = dataSnapshot.child("User Id: " + uid);
         final Iterable<DataSnapshot> listings = userId.getChildren();
         for (DataSnapshot ds : listings) {
@@ -78,7 +78,7 @@ public class EditParkingSpot extends AppCompatActivity {
                 AlertDialog.Builder adb=new AlertDialog.Builder(EditParkingSpot.this);
                 adb.setTitle("Edit Parking");
                 adb.setMessage("Are you sure you want Edit your spot?");
-                final DataSnapshot remove =edit.get(position);
+                final DataSnapshot remove = edit.get(position);
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

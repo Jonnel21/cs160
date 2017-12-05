@@ -131,7 +131,7 @@ public class SearchZipActivity extends AppCompatActivity {
 
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
-                if(spot.owner !=null && spot.availability == true && !spot.owner.equals(uid) && spot.address != null && spot.zip.equals(ziptosearch)) {
+                if(spot.owner !=null && spot.availability && !spot.owner.equals(uid) && spot.address != null && spot.zip.equals(ziptosearch)) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
                 }

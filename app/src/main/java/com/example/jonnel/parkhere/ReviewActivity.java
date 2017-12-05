@@ -22,7 +22,6 @@ public class ReviewActivity extends AppCompatActivity {
     FirebaseUser user;
     String uid;
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
-    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +35,9 @@ public class ReviewActivity extends AppCompatActivity {
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                name = dataSnapshot.child(("User Id: ") + uid).child("User Information").getValue().toString();
-                System.out.println("WritingActivity Class: " + name);
-                System.out.println("WritingActivity Class: " + nameParser(name));
+                //name = dataSnapshot.child(("User Id: ") + uid).child("User Information").getValue().toString();
+                //System.out.println("WritingActivity Class: " + name);
+                //System.out.println("WritingActivity Class: " + nameParser(name));
             }
 
             @Override
@@ -100,8 +99,5 @@ public class ReviewActivity extends AppCompatActivity {
         int last = str.lastIndexOf(",");
 
         return str.substring(start + 1 , end) + " " + str.substring(first + 10 , last);
-    }
-    public String getName(){
-        return name;
     }
 }

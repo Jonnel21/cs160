@@ -64,7 +64,7 @@ public class changeSpotInformation extends AppCompatActivity {
                 sTime.setText(dataSnapshot.child("startTime").getValue().toString());
                 eTime.setText(dataSnapshot.child("endTime").getValue().toString());
                 price.setText( dataSnapshot.child("price").getValue().toString());
-                dataSnapshot.child("availability").getRef().setValue("true");
+                dataSnapshot.child("availability").getRef().setValue(true);
             }
 
             @Override

@@ -57,7 +57,9 @@ public class ListingOverviewActivity extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.out.println(bookings);
+                //System.out.println(counterParser(bookings));
+                //System.out.println(ownerParser(bookings));
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListingOverviewActivity.this);
                 builder.setMessage("Are you sure you would like to Book now?")
                         .setCancelable(false)
@@ -83,22 +85,22 @@ public class ListingOverviewActivity extends AppCompatActivity {
 
     private String ownerParser(String str){
         int start = str.indexOf("owner=");
-        int end = str.lastIndexOf(",");
+        int end = str.indexOf("Ratings=");
 
-        return str.substring(start + 6, end);
+        return str.substring(start + 6, end - 2);
     }
 
     private String keyParser(String str){
-        int start = str.indexOf("key");
-        int end = str.indexOf(",");
+        int start = str.indexOf("listingHash=");
+        int end = str.indexOf("owner=");
 
-        return str.substring(start + 6, end);
+        return str.substring(start + 12, end - 2);
     }
 
     private String counterParser(String str){
         int start = str.indexOf("counter=");
         int end = str.lastIndexOf("}");
 
-        return str.substring(start + 8, end - 2);
+        return str.substring(start + 8, end);
     }
 }

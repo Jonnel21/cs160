@@ -43,9 +43,9 @@ public class WritingActivity extends AppCompatActivity {
                 dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String name = dataSnapshot.child(("User Id: ") + owner).child("User Information").getValue().toString();
-                        System.out.println("WritingActivity Class: " + name);
-                        System.out.println("WritingActivity Class: " + nameParser(name));
+                        //String name = dataSnapshot.child(("User Id: ") + owner).child("User Information").getValue().toString();
+                        //System.out.println("WritingActivity Class: " + name);
+                        //System.out.println("WritingActivity Class: " + nameParser(name));
                     }
 
                     @Override
