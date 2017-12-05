@@ -22,6 +22,7 @@ public class ReviewActivity extends AppCompatActivity {
     FirebaseUser user;
     String uid;
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,20 @@ public class ReviewActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         array = new ArrayList<>();
+
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                name = dataSnapshot.child(("User Id: ") + uid).child("User Information").getValue().toString();
+                System.out.println("WritingActivity Class: " + name);
+                System.out.println("WritingActivity Class: " + nameParser(name));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -43,9 +58,11 @@ public class ReviewActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
-    private void showData(DataSnapshot snapshot){
+    /*private void showData(DataSnapshot snapshot){
         array.clear();
         Iterable<DataSnapshot> children = snapshot.child("User Id: " + uid).child("User Information").child("Ratings").child("Reviews").getChildren();
         for(DataSnapshot ds : children){
@@ -53,5 +70,38 @@ public class ReviewActivity extends AppCompatActivity {
         }
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
         reviews.setAdapter(adapter);
+    }*/
+
+    private void showData(DataSnapshot snapshot){
+        array.clear();
+        Iterable<DataSnapshot> children = snapshot.child("User Id: " + uid).getChildren();
+        for(DataSnapshot ds : children){
+            //array.add(ds.getValue(String.class));
+            if(!(ds.getKey().equals("User Information"))) {
+                Iterable<DataSnapshot> ratings = snapshot.child("User Id: " + uid).child(ds.getKey()).child("Ratings").getChildren();
+
+                for(DataSnapshot dss : ratings){
+                    array.add(dss.getValue().toString());
+
+                }
+            }
+        }
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
+        reviews.setAdapter(adapter);
+    }
+
+    private String nameParser(String str){
+        // parse first name
+        int start = str.indexOf("=");
+        int end = str.indexOf(",");
+
+        // parse last name
+        int first = str.indexOf("Last name=");
+        int last = str.lastIndexOf(",");
+
+        return str.substring(start + 1 , end) + " " + str.substring(first + 10 , last);
+    }
+    public String getName(){
+        return name;
     }
 }

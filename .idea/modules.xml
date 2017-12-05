@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://S:\StudioProjects\kill me\ParkHereRepo.iml" filepath="S:\StudioProjects\kill me\ParkHereRepo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WelcomePage/WelcomePage.iml" filepath="$PROJECT_DIR$/WelcomePage/WelcomePage.iml" />
-      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-daniel-test\WelcomePage\WelcomePage.iml" filepath="C:\Users\Jonnel\Desktop\cs160-daniel-test\WelcomePage\WelcomePage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-daniel-test\app\app.iml" filepath="C:\Users\Jonnel\Desktop\cs160-daniel-test\app\app.iml" />
-      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\daniel-test\cs160-daniel-test.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\daniel-test\cs160-daniel-test.iml" />
-      <module fileurl="file://S:\StudioProjects\kill me\cs160-latestbuild.iml" filepath="S:\StudioProjects\kill me\cs160-latestbuild.iml" />
-      <module fileurl="file://$PROJECT_DIR$/daniel-test.iml" filepath="$PROJECT_DIR$/daniel-test.iml" />
-      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-daniel-test\daniel-test.iml" filepath="C:\Users\Jonnel\Desktop\cs160-daniel-test\daniel-test.iml" />
-      <module fileurl="file://C:\Users\Jonnel\Desktop\cs160-latestbuild\kill me.iml" filepath="C:\Users\Jonnel\Desktop\cs160-latestbuild\kill me.iml" />
-      <module fileurl="file://C:\Users\Daniel\Documents\AndroidProjects\daniel-test\kill me.iml" filepath="C:\Users\Daniel\Documents\AndroidProjects\daniel-test\kill me.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/cs160-daniel-test/app/app.iml" filepath="$USER_HOME$/Desktop/cs160-daniel-test/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs160.iml" filepath="$PROJECT_DIR$/cs160.iml" />
     </modules>
   </component>
 </project>

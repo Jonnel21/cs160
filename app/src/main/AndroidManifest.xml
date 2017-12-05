@@ -81,7 +81,9 @@
         <activity android:name=".ReuseParkingSpot" />
         <activity android:name=".changeSpotInformation" />
         <activity android:name=".ChooseSearchActivity" />
-        <activity android:name=".SearchZipActivity"></activity>
+        <activity android:name=".SearchZipActivity" />
+        <activity android:name=".WritingActivity" />
+        <activity android:name=".ListingOverviewActivity" />
     </application>
 
 </manifest>

@@ -127,8 +127,11 @@ public class createListing_Activity extends AppCompatActivity {
                 formatter.format(price);
 
 
+                DatabaseReference userRef = dataRef.child("User Id: " + uid);
+                DatabaseReference listingRef = userRef.push();
+                key = listingRef.getKey();
 
-                PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null,0);
+                PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null,0, getKey());
 
                // if (address_text != null && price_text != null) {
                 if(validPrice(price) && validAddress(address) && PriceBound(price)){
@@ -150,12 +153,8 @@ public class createListing_Activity extends AppCompatActivity {
                 }
 
 
-                DatabaseReference userRef = dataRef.child("User Id: " + uid);
-                DatabaseReference listingRef = userRef.push();
+
                 listingRef.setValue(spot);
-                key = listingRef.getKey();
-
-
                 menu();
 
             }

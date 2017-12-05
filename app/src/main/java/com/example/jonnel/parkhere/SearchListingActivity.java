@@ -74,7 +74,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
     private void showData(final DataSnapshot dataSnapshot){
         array.clear();
-        final ArrayList<DataSnapshot> bookings = new ArrayList();
+        final ArrayList<DataSnapshot> bookings = new ArrayList<>();
         // Store users key in array list
         for(DataSnapshot d: dataSnapshot.getChildren()) {
             mUsers.add(String.valueOf(d.getKey()));
@@ -98,7 +98,7 @@ public class SearchListingActivity extends AppCompatActivity {
 
         final   ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
         mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchListingActivity.this);
@@ -139,6 +139,26 @@ public class SearchListingActivity extends AppCompatActivity {
                 builder.show();
 
             }
+        });*/
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+
+                String listingHash = getListingHashParser(array.get(i));
+                System.out.println(listingHash);
+                System.out.println(array.get(i));
+                String listings = bookings.get(i).getValue().toString();
+                System.out.println(listings);
+                Intent intent = new Intent(getApplicationContext(), ListingOverviewActivity.class);
+                intent.putExtra("Booking", listings);
+                intent.putExtra("Owner", getOwnerParser(array.get(i)));
+                intent.putExtra("ListingHash", getListingHashParser(array.get(i)));
+                intent.putExtra("DataSnapshot", bookings.get(i).toString());
+                System.out.println("Printing from SearchListing: " + bookings.get(i).toString());
+
+                startActivity(intent);
+            }
         });
     }
 
@@ -151,6 +171,16 @@ public class SearchListingActivity extends AppCompatActivity {
     private String getOwnerParser(String str){
         int indexOfColon = str.indexOf(":");
         return str.substring(indexOfColon + 1 , 47); // TODO: hard coded end index. need to fix.
+    }
+
+    /**
+     * helper method to parse string of Listing hash
+     * @param str
+     * @return
+     */
+    private String getListingHashParser(String str){
+        int index = str.indexOf("=");
+        return str.substring(index + 2, str.length());
     }
 
 }
