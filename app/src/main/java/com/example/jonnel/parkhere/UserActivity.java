@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 public class UserActivity extends AppCompatActivity {
     private Button signOutButton;
     private TextView helloUserText;
@@ -17,6 +18,7 @@ public class UserActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Button deleteListing;
     private Button searchListing;
+    private Button myBookings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         auth=FirebaseAuth.getInstance();
+        myBookings = (Button) findViewById(R.id.button6);
         deleteListing = (Button) findViewById(R.id.deleteButton);
         signOutButton = (Button) findViewById(R.id.signoutButton);
         createListing = (Button) findViewById(R.id.createButton);
@@ -71,33 +74,35 @@ public class UserActivity extends AppCompatActivity {
                 profile();
             }
         });
+        myBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myBooking();
+            }
+        });
     }
 
-    private void deleteListingNow()
-    {
+    private void myBooking(){
+        Intent intent = new Intent(this, MyBookingActivity.class);
+        startActivity(intent);
+    }
+    private void deleteListingNow(){
         Intent deleteIntent = new Intent(this, DeleteActivity.class);
         startActivity(deleteIntent);
 
     }
-
-        private void profile()
-        {
+    private void profile(){
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
-
-    private void startCreateListing()
-    {
+    private void startCreateListing() {
         Intent intent = new Intent(this, chooseSpot.class);
         startActivity(intent);
     }
-
-
     private void startSearchListing(){
         Intent intent = new Intent(this, ChooseSearchActivity.class);
         startActivity(intent);
     }
-
     private void signOutButton(){
         auth.signOut();
         startActivity(new Intent(UserActivity.this,WelcomeActivity.class));
@@ -107,20 +112,15 @@ public class UserActivity extends AppCompatActivity {
     public boolean userIsValid(FirebaseUser user){
         return user != null;
     }
-
     protected void onResume()
     {
         super.onResume();
     }
-
-    public void onStart()
-    {
+    public void onStart(){
         super.onStart();
         auth.addAuthStateListener(authListener);
     }
-
-    public void onStop()
-    {
+    public void onStop(){
         super.onStop();
         if(authListener!=null)
         {

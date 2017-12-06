@@ -3,6 +3,7 @@ package com.example.jonnel.parkhere;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,13 +29,14 @@ public class SearchListingActivity extends AppCompatActivity {
     ArrayList<String> array;
     ArrayList<String> mUsers;
     ArrayList<String> lKeys;
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_listing);
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         mListView = findViewById(R.id.Listview);
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -65,6 +67,7 @@ public class SearchListingActivity extends AppCompatActivity {
     private void showData(final DataSnapshot dataSnapshot){
         array.clear();
         final ArrayList<DataSnapshot> bookings = new ArrayList<>();
+        final ArrayList<DataSnapshot> ogInfo = new ArrayList<>();
         // Store users key in array list
         for(DataSnapshot d: dataSnapshot.getChildren()) {
             mUsers.add(String.valueOf(d.getKey()));
@@ -74,14 +77,19 @@ public class SearchListingActivity extends AppCompatActivity {
             DataSnapshot userId = dataSnapshot.child(mUsers.get(i));
             Iterable<DataSnapshot> listings = userId.getChildren();
 
-
             for (DataSnapshot ds : listings) {
                 PSpot spot = ds.getValue(PSpot.class);
                 if(spot.owner !=null && spot.availability && !spot.owner.equals(uid) && spot.address != null) {
                     array.add(spot.ownerToString());
                     bookings.add(ds);
+                    System.out.println("Printing bookings in searchListing: " + bookings.toString());
                 }
 
+            }
+
+            for(DataSnapshot dss : dataSnapshot.child("User Id: " + mUsers.get(i)).child(key).child("Original Information").getChildren()){
+                //ogInfo.add(dss);
+                //System.out.println(ogInfo);
             }
             i++;
         }
@@ -135,14 +143,17 @@ public class SearchListingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
-                String listingHash = getListingHashParser(array.get(i));
-                String listings = bookings.get(i).getValue().toString();
-                String owner = getOwnerParser(array.get(i));
+                String listingHash = getListingHashParser(bookings.get(i).toString());
+                String listings = bookings.get(i).toString();
+                String owner = getOwnerParser(bookings.get(i).toString());
+                System.out.println("SearchListing " + owner);
+                //System.out.println("SearchListing " + ogInfo.get(i).toString());
                 Intent intent = new Intent(getApplicationContext(), ListingOverviewActivity.class);
                 intent.putExtra("Booking", listings);
                 intent.putExtra("Owner", owner);
                 intent.putExtra("ListingHash", listingHash);
                 intent.putExtra("DataSnapshot", listings);
+                //intent.putExtra("sTime", null)
                 startActivity(intent);
             }
         });
@@ -155,8 +166,10 @@ public class SearchListingActivity extends AppCompatActivity {
      * @return
      */
     private String getOwnerParser(String str){
-        int indexOfColon = str.indexOf(":");
-        return str.substring(indexOfColon + 1 , 47); // TODO: hard coded end index. need to fix.
+        int start = str.indexOf("owner=");
+        int end = str.indexOf("price=");
+
+        return str.substring(start + 6, end - 2);
     }
 
     /**
@@ -165,8 +178,10 @@ public class SearchListingActivity extends AppCompatActivity {
      * @return
      */
     private String getListingHashParser(String str){
-        int index = str.indexOf("=");
-        return str.substring(index + 2, str.length());
+        int start = str.indexOf("listingHash=");
+        int end = str.indexOf("owner=");
+
+        return str.substring(start + 12, end - 2);
     }
 
 }

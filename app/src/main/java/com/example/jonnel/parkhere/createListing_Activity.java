@@ -131,6 +131,7 @@ public class createListing_Activity extends AppCompatActivity {
                 DatabaseReference listingRef = userRef.push();
                 key = listingRef.getKey();
 
+
                 PSpot spot = new PSpot(price, address,stateInput,zip, sDate, eDate, sTime, eTime, true, uid, null,0, getKey());
 
                // if (address_text != null && price_text != null) {
@@ -155,6 +156,10 @@ public class createListing_Activity extends AppCompatActivity {
 
 
                 listingRef.setValue(spot);
+                dataRef.child("User Id: " + uid).child(key).child("Original Information").child("Start Time").setValue(sTime);
+                dataRef.child("User Id: " + uid).child(key).child("Original Information").child("End Time").setValue(eTime);
+                dataRef.child("User Id: " + uid).child(key).child("Original Information").child("Start Date").setValue(sDate);
+                dataRef.child("User Id: " + uid).child(key).child("Original Information").child("End Date").setValue(eDate);
                 menu();
 
             }

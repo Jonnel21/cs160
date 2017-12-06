@@ -84,6 +84,7 @@
         <activity android:name=".SearchZipActivity" />
         <activity android:name=".WritingActivity" />
         <activity android:name=".ListingOverviewActivity" />
+        <activity android:name=".MyBookingActivity"></activity>
     </application>
 
 </manifest>
